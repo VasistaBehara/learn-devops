@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+      // Single Page App redirect for GitHub Pages
+      // This script redirects 404s to index.html while preserving the path
+      const pathSegmentsToKeep = 1; // Keep /learn-devops
+      const loc = window.location;
+      const redirectPath = loc.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + 
+        '/?p=' + encodeURIComponent(loc.pathname.slice(1)) + 
+        (loc.search ? '&q=' + encodeURIComponent(loc.search.slice(1)) : '') +
+        loc.hash;
+      loc.replace(redirectPath);
+    </script>
+  </head>
+  <body>
+    Redirecting...
+  </body>
+</html>

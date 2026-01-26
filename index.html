@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Learn DevOps - Master AWS, GCP, Azure, Terraform, Ansible, Git, Docker, and Kubernetes with comprehensive concepts and interview preparation." />
-    <title>DevOps Learning Hub</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Learn DevOps - Master AWS, GCP, Azure, Terraform, Ansible, Git, Docker, and Kubernetes with comprehensive concepts and interview preparation." />
+  <title>DevOps Learning Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    // Handle redirect from 404.html for SPA routing
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const path = params.get('p');
+      if (path) {
+        const query = params.get('q') ? '?' + params.get('q') : '';
+        const hash = window.location.hash;
+        window.history.replaceState(null, '', '/' + path + query + hash);
+      }
+    })();
+  </script>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

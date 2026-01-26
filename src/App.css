@@ -151,11 +151,13 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 85;
     opacity: 0;
+    pointer-events: none;
     transition: opacity var(--transition-normal);
 }
 
 .sidebar-overlay.visible {
     opacity: 1;
+    pointer-events: auto;
 }
 
 @media (max-width: 1024px) {
