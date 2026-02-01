@@ -19,6 +19,16 @@ import gitlabData from '../data/gitlab';
 import githubActionsData from '../data/github-actions';
 import linuxData from '../data/linux';
 import sreData from '../data/sre';
+import prometheusData from '../data/prometheus';
+import grafanaData from '../data/grafana';
+import helmData from '../data/helm';
+import vaultData from '../data/vault';
+import argocdData from '../data/argocd';
+import cloudformationData from '../data/cloudformation';
+import bashData from '../data/bash';
+import pythonData from '../data/python';
+import yamlData from '../data/yaml';
+import jsonData from '../data/json';
 
 const toolsData = {
     aws: awsData,
@@ -33,7 +43,17 @@ const toolsData = {
     gitlab: gitlabData,
     'github-actions': githubActionsData,
     linux: linuxData,
-    sre: sreData
+    sre: sreData,
+    prometheus: prometheusData,
+    grafana: grafanaData,
+    helm: helmData,
+    vault: vaultData,
+    argocd: argocdData,
+    cloudformation: cloudformationData,
+    bash: bashData,
+    python: pythonData,
+    yaml: yamlData,
+    json: jsonData
 };
 
 function ToolPage() {

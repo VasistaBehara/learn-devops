@@ -8,9 +8,9 @@ A modern, interactive web application for learning DevOps tools and preparing fo
 
 ## Features
 
-- **8 DevOps Learning Paths**: AWS, GCP, Azure, Terraform, Ansible, Git, Docker, Kubernetes
-- **Comprehensive Content**: 80+ key concepts with code examples
-- **Interview Preparation**: 120+ Q&As with detailed answers
+- **13 DevOps Learning Paths**: AWS, GCP, Azure, Terraform, Ansible, Git, Docker, Kubernetes, Jenkins, GitLab, GitHub Actions, Linux, SRE
+- **Comprehensive Content**: 150+ key concepts with code examples
+- **Interview Preparation**: 210+ Q&As with detailed answers
 - **Dark Mode**: Toggle between light and dark themes
 - **Search**: Filter concepts and questions within each tool
 - **Responsive Design**: Works on desktop, tablet, and mobile
@@ -53,6 +53,120 @@ src/
 └── index.css         # Global styles & theme
 ```
 
+---
+
+## 📝 How to Add/Edit Content Manually
+
+### Adding Concepts to an Existing Tool
+
+1. Open the tool's data file in `src/data/` (e.g., `aws.js`, `docker.js`)
+2. Find the `concepts` array and add a new object:
+
+```javascript
+{
+  title: 'Your Concept Title',
+  content: `Explanation of the concept. Can be multiple paragraphs.
+
+Use backticks for multi-line content. Second paragraph here.`,
+  codeExample: {
+    language: 'bash',  // bash, yaml, python, javascript, json, etc.
+    code: `your code example here
+can be multiple lines`
+  }
+}
+```
+
+### Adding Interview Q&As
+
+1. Find the `questions` array in the same data file
+2. Add a new object:
+
+```javascript
+{
+  question: 'Your interview question?',
+  answer: `The detailed answer. Can include multiple paragraphs.
+
+Include key points and practical examples.`
+}
+```
+
+### ⚠️ Important: Escaping Special Characters
+
+When using template literals (backticks), you MUST escape:
+- Dollar signs in shell/CI variables: `\$VARIABLE` instead of `$VARIABLE`
+- GitHub Actions expressions: `\${{ }}` instead of `${{ }}`
+
+Example:
+```javascript
+// ❌ WRONG - will cause JavaScript errors
+code: `echo $HOME`
+code: `key: ${{ secrets.TOKEN }}`
+
+// ✅ CORRECT - escaped
+code: `echo \\$HOME`
+code: `key: \\${{ secrets.TOKEN }}`
+```
+
+### Adding a New Tool
+
+1. Create a new file `src/data/newtool.js`:
+
+```javascript
+export default {
+  id: 'newtool',           // URL-friendly ID (lowercase, no spaces)
+  name: 'New Tool Name',   // Display name
+  icon: '🔧',              // Emoji icon
+  description: 'Brief description of the tool.',
+  concepts: [
+    // Add 10-20 concepts here
+  ],
+  questions: [
+    // Add 15-25 Q&As here
+  ]
+};
+```
+
+2. Import in `src/pages/ToolPage.jsx`:
+
+```javascript
+import newtoolData from '../data/newtool';
+
+const toolsData = {
+  // ... existing tools
+  newtool: newtoolData,
+};
+```
+
+3. Add to navigation in `src/components/Sidebar.jsx`:
+
+```javascript
+const tools = [
+  // ... existing tools
+  { id: 'newtool', name: 'New Tool', icon: '🔧' },
+];
+```
+
+4. Add to homepage in `src/pages/HomePage.jsx`:
+
+```javascript
+const tools = [
+  // ... existing tools
+  {
+    id: 'newtool',
+    name: 'New Tool Name',
+    icon: '🔧',
+    description: 'Brief description here.',
+    conceptCount: 10,      // Update with actual count
+    questionCount: 15,     // Update with actual count
+    color: '#hexcolor'     // Brand color
+  }
+];
+```
+
+5. Update stats in `HomePage.jsx` hero section if needed.
+
+---
+
 ## Tech Stack
 
 - **React 18** - UI library
@@ -60,29 +174,6 @@ src/
 - **Vite 5** - Build tool
 - **Prism.js** - Syntax highlighting
 - **CSS Custom Properties** - Theming
-
-## Adding Content
-
-Edit files in `src/data/` to add or modify content:
-
-```javascript
-// src/data/toolname.js
-export default {
-  id: 'toolname',
-  name: 'Tool Name',
-  icon: '🔧',
-  concepts: [
-    {
-      title: 'Concept Title',
-      content: 'Explanation...',
-      codeExample: { language: 'bash', code: '...' }
-    }
-  ],
-  questions: [
-    { question: 'Question?', answer: 'Answer...' }
-  ]
-};
-```
 
 ## Contributing
 

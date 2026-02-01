@@ -14,6 +14,16 @@ const tools = [
     { id: 'github-actions', name: 'GitHub Actions', icon: '⚡' },
     { id: 'linux', name: 'Linux', icon: '🐧' },
     { id: 'sre', name: 'SRE', icon: '🔥' },
+    { id: 'prometheus', name: 'Prometheus', icon: '🔥' },
+    { id: 'grafana', name: 'Grafana', icon: '📊' },
+    { id: 'helm', name: 'Helm', icon: '⎈' },
+    { id: 'vault', name: 'Vault', icon: '🔐' },
+    { id: 'argocd', name: 'ArgoCD', icon: '🔄' },
+    { id: 'cloudformation', name: 'CloudFormation', icon: '📋' },
+    { id: 'bash', name: 'Bash/Shell', icon: '💻' },
+    { id: 'python', name: 'Python', icon: '🐍' },
+    { id: 'yaml', name: 'YAML', icon: '📝' },
+    { id: 'json', name: 'JSON', icon: '📋' },
 ];
 
 function Sidebar({ isOpen, onClose }) {

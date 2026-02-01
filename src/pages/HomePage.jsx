@@ -117,6 +117,96 @@ const tools = [
         conceptCount: 10,
         questionCount: 15,
         color: '#ea4335'
+    },
+    {
+        id: 'prometheus',
+        name: 'Prometheus',
+        icon: '🔥',
+        description: 'Metrics collection and alerting with PromQL and service discovery.',
+        conceptCount: 10,
+        questionCount: 15,
+        color: '#e6522c'
+    },
+    {
+        id: 'grafana',
+        name: 'Grafana',
+        icon: '📊',
+        description: 'Visualization platform for metrics, logs, and traces dashboards.',
+        conceptCount: 10,
+        questionCount: 15,
+        color: '#f46800'
+    },
+    {
+        id: 'helm',
+        name: 'Helm',
+        icon: '⎈',
+        description: 'Kubernetes package manager for deploying and managing applications.',
+        conceptCount: 10,
+        questionCount: 15,
+        color: '#0f1689'
+    },
+    {
+        id: 'vault',
+        name: 'HashiCorp Vault',
+        icon: '🔐',
+        description: 'Secrets management, encryption, and identity-based access control.',
+        conceptCount: 10,
+        questionCount: 15,
+        color: '#000000'
+    },
+    {
+        id: 'argocd',
+        name: 'ArgoCD',
+        icon: '🔄',
+        description: 'GitOps continuous delivery for Kubernetes with declarative configuration.',
+        conceptCount: 10,
+        questionCount: 15,
+        color: '#ef7b4d'
+    },
+    {
+        id: 'cloudformation',
+        name: 'AWS CloudFormation',
+        icon: '📋',
+        description: 'AWS Infrastructure as Code with templates, stacks, and StackSets.',
+        conceptCount: 10,
+        questionCount: 15,
+        color: '#ff9900'
+    },
+    {
+        id: 'bash',
+        name: 'Bash/Shell Scripting',
+        icon: '💻',
+        description: 'Essential scripting for automation, system admin, and DevOps workflows.',
+        conceptCount: 20,
+        questionCount: 20,
+        color: '#4eaa25'
+    },
+    {
+        id: 'python',
+        name: 'Python for DevOps',
+        icon: '🐍',
+        description: 'Python automation, AWS SDK, Docker, Kubernetes, and infrastructure tooling.',
+        conceptCount: 20,
+        questionCount: 20,
+        color: '#3776ab'
+    },
+    {
+        id: 'yaml',
+        name: 'YAML',
+        icon: '📝',
+        description: 'Human-readable data format for Kubernetes, Docker Compose, and CI/CD configs.',
+        conceptCount: 10,
+        questionCount: 15,
+        color: '#cb171e'
+    },
+    {
+        id: 'json',
+        name: 'JSON',
+        icon: '📋',
+        description: 'Data interchange format for APIs, configuration, and jq processing.',
+        conceptCount: 10,
+        questionCount: 15,
+        color: '#000000'
     }
 ];
 
@@ -138,15 +228,15 @@ function HomePage() {
                 </p>
                 <div className="hero-stats">
                     <div className="hero-stat">
-                        <div className="hero-stat-value">13</div>
+                        <div className="hero-stat-value">23</div>
                         <div className="hero-stat-label">Tools Covered</div>
                     </div>
                     <div className="hero-stat">
-                        <div className="hero-stat-value">140+</div>
+                        <div className="hero-stat-value">260+</div>
                         <div className="hero-stat-label">Key Concepts</div>
                     </div>
                     <div className="hero-stat">
-                        <div className="hero-stat-value">200+</div>
+                        <div className="hero-stat-value">350+</div>
                         <div className="hero-stat-label">Interview Q&As</div>
                     </div>
                 </div>
