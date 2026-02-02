@@ -151,20 +151,49 @@ fdisk -l                    # List partitions` }
         }
     ],
     questions: [
-        { question: 'What is the difference between hard and soft links?', answer: `Hard link: Same inode, can't cross filesystems, survives original deletion. Soft (symbolic) link: Points to path, can cross filesystems, breaks if original deleted. Use ln -s for soft links.` },
-        { question: 'Explain file permissions in Linux.', answer: `Three types: read (4), write (2), execute (1). Three groups: owner, group, others. Octal like 755 or symbolic like rwxr-xr-x. chmod changes, chown for ownership.` },
-        { question: 'What is the difference between kill -9 and kill -15?', answer: `kill -15 (SIGTERM): Graceful, process can cleanup. kill -9 (SIGKILL): Force, immediate, no cleanup. Always try -15 first. -9 can leave resources locked.` },
-        { question: 'How does systemd differ from init?', answer: `systemd: Parallel startup, socket activation, cgroups, journal logging. init (SysV): Sequential, scripts in /etc/init.d. systemd is faster, more features. Most modern distros use systemd.` },
-        { question: 'What are inodes?', answer: `Data structures storing file metadata (permissions, owner, timestamps, block locations). Filename stored in directory, points to inode. Limited per filesystem. df -i shows usage.` },
-        { question: 'Explain stdout, stderr, and stdin.', answer: `stdin (0): Standard input. stdout (1): Standard output. stderr (2): Error output. Redirect: > stdout, 2> stderr, &> both. Pipe | connects stdout to stdin.` },
-        { question: 'What is the purpose of /etc/fstab?', answer: `Defines filesystems to mount at boot. Columns: device, mount point, type, options, dump, pass. Errors can prevent boot. Always test with mount -a.` },
-        { question: 'How do you troubleshoot high CPU usage?', answer: `top/htop to identify process. ps aux --sort=-%cpu. Check with strace. Profile with perf. Review logs. May need to kill, restart, or optimize process.` },
-        { question: 'Explain the boot process.', answer: `BIOS/UEFI → Bootloader (GRUB) → Kernel → init/systemd → Services. Kernel mounts root filesystem, starts init (PID 1). systemd starts services in parallel.` },
-        { question: 'What is swap and when is it used?', answer: `Virtual memory on disk. Used when RAM full. Slower than RAM. Important for stability. Configure with /etc/fstab or swap file. swapon/swapoff to manage.` },
-        { question: 'How do you check open ports?', answer: `ss -tulpn or netstat -tulpn. lsof -i :port for specific. nmap for external scan. Check firewall rules too. iptables -L or firewall-cmd --list-all.` },
-        { question: 'What is cron and how do you use it?', answer: `Scheduled task execution. Crontab format: min hour day month weekday command. crontab -e to edit. System cron in /etc/cron.d/. Log in /var/log/cron.` },
-        { question: 'Explain environment variables.', answer: `Key-value pairs affecting processes. export VAR=value to set. /etc/environment, ~/.bashrc for persistence. env to list. PATH for command lookup.` },
-        { question: 'How do you diagnose network issues?', answer: `ping for connectivity. traceroute for path. dig/nslookup for DNS. curl for HTTP. ss for sockets. tcpdump/wireshark for packets. Check /etc/resolv.conf, firewall.` },
-        { question: 'What is the difference between apt and dpkg?', answer: `dpkg: Low-level, installs .deb files, no dependency resolution. apt: High-level, uses repositories, handles dependencies. Use apt for normal operations, dpkg for manual installs.` }
+        { question: 'What is the difference between hard and soft links?', answer: `Hard link: Same inode, can't cross filesystems, survives original deletion.
+Soft (symbolic) link: Points to path, can cross filesystems, breaks if original deleted.
+Use ln -s for soft links.` },
+        { question: 'Explain file permissions in Linux.', answer: `Three types: read (4), write (2), execute (1).
+Three groups: owner, group, others.
+Octal like 755 or symbolic like rwxr-xr-x. chmod changes, chown for ownership.` },
+        { question: 'What is the difference between kill -9 and kill -15?', answer: `kill -15 (SIGTERM): Graceful, process can cleanup. kill -9 (SIGKILL): Force, immediate, no cleanup.
+Always try -15 first. -9 can leave resources locked.` },
+        { question: 'How does systemd differ from init?', answer: `systemd: Parallel startup, socket activation, cgroups, journal logging. init (SysV): Sequential, scripts in /etc/init.d. systemd is faster, more features.
+Most modern distros use systemd.` },
+        { question: 'What are inodes?', answer: `Data structures storing file metadata (permissions, owner, timestamps, block locations).
+Filename stored in directory, points to inode.
+Limited per filesystem. df -i shows usage.` },
+        { question: 'Explain stdout, stderr, and stdin.', answer: `stdin (0): Standard input. stdout (1): Standard output. stderr (2): Error output.
+Redirect: > stdout, 2> stderr, &> both.
+Pipe | connects stdout to stdin.` },
+        { question: 'What is the purpose of /etc/fstab?', answer: `Defines filesystems to mount at boot.
+Columns: device, mount point, type, options, dump, pass.
+Errors can prevent boot.
+Always test with mount -a.` },
+        { question: 'How do you troubleshoot high CPU usage?', answer: `top/htop to identify process. ps aux --sort=-%cpu.
+Check with strace.
+Profile with perf.
+Review logs.
+May need to kill, restart, or optimize process.` },
+        { question: 'Explain the boot process.', answer: `BIOS/UEFI → Bootloader (GRUB) → Kernel → init/systemd → Services.
+Kernel mounts root filesystem, starts init (PID 1). systemd starts services in parallel.` },
+        { question: 'What is swap and when is it used?', answer: `Virtual memory on disk.
+Used when RAM full.
+Slower than RAM.
+Important for stability.
+Configure with /etc/fstab or swap file. swapon/swapoff to manage.` },
+        { question: 'How do you check open ports?', answer: `ss -tulpn or netstat -tulpn. lsof -i :port for specific. nmap for external scan.
+Check firewall rules too. iptables -L or firewall-cmd --list-all.` },
+        { question: 'What is cron and how do you use it?', answer: `Scheduled task execution.
+Crontab format: min hour day month weekday command. crontab -e to edit.
+System cron in /etc/cron.d/.
+Log in /var/log/cron.` },
+        { question: 'Explain environment variables.', answer: `Key-value pairs affecting processes. export VAR=value to set. /etc/environment, ~/.bashrc for persistence. env to list.
+PATH for command lookup.` },
+        { question: 'How do you diagnose network issues?', answer: `ping for connectivity. traceroute for path. dig/nslookup for DNS. curl for HTTP. ss for sockets. tcpdump/wireshark for packets.
+Check /etc/resolv.conf, firewall.` },
+        { question: 'What is the difference between apt and dpkg?', answer: `dpkg: Low-level, installs .deb files, no dependency resolution. apt: High-level, uses repositories, handles dependencies.
+Use apt for normal operations, dpkg for manual installs.` }
     ]
 };

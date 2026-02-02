@@ -166,21 +166,70 @@ rate({job="app"}[5m])
         }
     ],
     questions: [
-        { question: 'What is Grafana and what problems does it solve?', answer: 'Grafana is an open-source visualization platform that unifies metrics, logs, and traces from multiple sources into customizable dashboards. It solves the problem of scattered observability data by providing a single pane of glass for monitoring.' },
-        { question: 'How do you connect Grafana to Prometheus?', answer: 'Add Prometheus as a data source in Configuration > Data Sources. Set the URL (e.g., http://prometheus:9090), configure authentication if needed, and test the connection. Then create panels using PromQL queries.' },
-        { question: 'What are Grafana variables and how are they used?', answer: 'Variables make dashboards dynamic. Query variables pull values from data sources (label_values), custom variables offer predefined options, and interval variables control time granularity. Use $variable syntax in queries.' },
-        { question: 'How do you implement dashboard as code?', answer: 'Use provisioning with YAML files to define data sources and dashboard providers. Store dashboard JSON in Git. Tools like Grafonnet (Jsonnet library) or Terraform Grafana provider enable programmatic dashboard creation.' },
-        { question: 'Explain Grafana alerting architecture.', answer: 'Alert rules define conditions and evaluation intervals. When triggered, alerts route through contact points (Slack, email, PagerDuty). Notification policies control routing, grouping, and timing. Silences temporarily mute alerts.' },
-        { question: 'How do you share dashboards across teams?', answer: 'Use folders with appropriate permissions. Export/import dashboard JSON. Use provisioning for GitOps. Create dashboard links for navigation. Use variables for multi-team dashboards. Consider Grafana Cloud for cross-org sharing.' },
-        { question: 'What is the difference between Grafana OSS and Enterprise?', answer: 'OSS is free with core features. Enterprise adds: enhanced RBAC, reporting, data source permissions, SAML/LDAP sync, auditing, team sync, and enterprise plugins. Both support the same visualization features.' },
-        { question: 'How do you optimize dashboard performance?', answer: 'Limit time range and data points. Use recording rules in Prometheus. Reduce panel count. Use appropriate refresh intervals. Cache data source queries. Avoid expensive regex in queries. Use mixed data sources sparingly.' },
-        { question: 'How do you migrate dashboards between environments?', answer: 'Export dashboard JSON (share icon > Export). Use provisioning for automated deployment. Tools like grizzly or grafana-backup help. API scripting for bulk operations. Keep UID consistent for updates.' },
-        { question: 'What are annotations and how are they useful?', answer: 'Annotations mark events on time series graphs (deployments, incidents, changes). They provide context for metric changes. Add via UI, API, or automatically from data sources. Essential for correlating events with metrics.' },
-        { question: 'How do you implement high availability for Grafana?', answer: 'Use external database (PostgreSQL/MySQL) instead of SQLite. Deploy multiple Grafana instances behind load balancer. Share session storage. Use remote image rendering. Deploy in Kubernetes with replicas.' },
-        { question: 'What is Grafana Loki and how does it integrate?', answer: 'Loki is a log aggregation system using Prometheus-like labels. Add as data source in Grafana. Query with LogQL. Correlate logs with metrics using matching labels. Explore view provides log searching and filtering.' },
-        { question: 'How do you create a unified observability view?', answer: 'Add multiple data sources (Prometheus for metrics, Loki for logs, Tempo/Jaeger for traces). Use consistent labels across sources. Create dashboards with mixed panels. Use Explore for ad-hoc correlation.' },
-        { question: 'What are transformations in Grafana?', answer: 'Transformations process query results before visualization: merge, filter, calculate, rename, join data frames. Examples: reduce rows, add field from calculation, filter by value. Chain multiple transformations.' },
-        { question: 'How do you secure a Grafana installation?', answer: 'Enable HTTPS/TLS. Configure authentication (OAuth, LDAP, SAML). Set proper RBAC permissions. Disable anonymous access. Use secrets management for credentials. Enable audit logging. Regularly update Grafana.' }
+        { question: 'What is Grafana and what problems does it solve?', answer: `Grafana is an open-source visualization platform that unifies metrics, logs, and traces from multiple sources into customizable dashboards.
+It solves the problem of scattered observability data by providing a single pane of glass for monitoring.` },
+        { question: 'How do you connect Grafana to Prometheus?', answer: `Add Prometheus as a data source in Configuration > Data Sources.
+Set the URL (e.g., http://prometheus:9090), configure authentication if needed, and test the connection.
+Then create panels using PromQL queries.` },
+        { question: 'What are Grafana variables and how are they used?', answer: `Variables make dashboards dynamic.
+Query variables pull values from data sources (label_values), custom variables offer predefined options, and interval variables control time granularity.
+Use $variable syntax in queries.` },
+        { question: 'How do you implement dashboard as code?', answer: `Use provisioning with YAML files to define data sources and dashboard providers.
+Store dashboard JSON in Git.
+Tools like Grafonnet (Jsonnet library) or Terraform Grafana provider enable programmatic dashboard creation.` },
+        { question: 'Explain Grafana alerting architecture.', answer: `Alert rules define conditions and evaluation intervals.
+When triggered, alerts route through contact points (Slack, email, PagerDuty).
+Notification policies control routing, grouping, and timing.
+Silences temporarily mute alerts.` },
+        { question: 'How do you share dashboards across teams?', answer: `Use folders with appropriate permissions.
+Export/import dashboard JSON.
+Use provisioning for GitOps.
+Create dashboard links for navigation.
+Use variables for multi-team dashboards.
+Consider Grafana Cloud for cross-org sharing.` },
+        { question: 'What is the difference between Grafana OSS and Enterprise?', answer: `OSS is free with core features.
+Enterprise adds: enhanced RBAC, reporting, data source permissions, SAML/LDAP sync, auditing, team sync, and enterprise plugins.
+Both support the same visualization features.` },
+        { question: 'How do you optimize dashboard performance?', answer: `Limit time range and data points.
+Use recording rules in Prometheus.
+Reduce panel count.
+Use appropriate refresh intervals.
+Cache data source queries.
+Avoid expensive regex in queries.
+Use mixed data sources sparingly.` },
+        { question: 'How do you migrate dashboards between environments?', answer: `Export dashboard JSON (share icon > Export).
+Use provisioning for automated deployment.
+Tools like grizzly or grafana-backup help.
+API scripting for bulk operations.
+Keep UID consistent for updates.` },
+        { question: 'What are annotations and how are they useful?', answer: `Annotations mark events on time series graphs (deployments, incidents, changes).
+They provide context for metric changes.
+Add via UI, API, or automatically from data sources.
+Essential for correlating events with metrics.` },
+        { question: 'How do you implement high availability for Grafana?', answer: `Use external database (PostgreSQL/MySQL) instead of SQLite.
+Deploy multiple Grafana instances behind load balancer.
+Share session storage.
+Use remote image rendering.
+Deploy in Kubernetes with replicas.` },
+        { question: 'What is Grafana Loki and how does it integrate?', answer: `Loki is a log aggregation system using Prometheus-like labels.
+Add as data source in Grafana.
+Query with LogQL.
+Correlate logs with metrics using matching labels.
+Explore view provides log searching and filtering.` },
+        { question: 'How do you create a unified observability view?', answer: `Add multiple data sources (Prometheus for metrics, Loki for logs, Tempo/Jaeger for traces).
+Use consistent labels across sources.
+Create dashboards with mixed panels.
+Use Explore for ad-hoc correlation.` },
+        { question: 'What are transformations in Grafana?', answer: `Transformations process query results before visualization: merge, filter, calculate, rename, join data frames.
+Examples: reduce rows, add field from calculation, filter by value.
+Chain multiple transformations.` },
+        { question: 'How do you secure a Grafana installation?', answer: `Enable HTTPS/TLS.
+Configure authentication (OAuth, LDAP, SAML).
+Set proper RBAC permissions.
+Disable anonymous access.
+Use secrets management for credentials.
+Enable audit logging.
+Regularly update Grafana.` }
     ]
 };
 

@@ -159,20 +159,68 @@ az eventhubs namespace create -n myEH -g myRG -l eastus` }
         }
     ],
     questions: [
-        { question: 'What is the difference between Azure AD and AD DS?', answer: `AD DS: On-premises, LDAP, Kerberos, Group Policy. Azure AD: Cloud-based, REST/SAML/OAuth, no Group Policy, SSO for SaaS. Azure AD Connect syncs between them.` },
-        { question: 'Explain Availability Sets vs Zones.', answer: `Sets: Fault domains + Update domains within datacenter (99.95%). Zones: Separate datacenters in region (99.99%). Use Zones for production, Sets when Zones unavailable.` },
-        { question: 'What are Managed Identities?', answer: `Azure resource identity without credentials. System-assigned (tied to resource) or User-assigned (independent). Eliminates secrets in code. Use for accessing Key Vault, Storage, etc.` },
-        { question: 'How does VNet Peering work?', answer: `Private connectivity between VNets via Azure backbone. Non-transitive. Can span regions (global peering). Low latency. Traffic not free. Alternative: VPN Gateway.` },
-        { question: 'What is Azure Policy?', answer: `Governance service. Policies define rules, Initiatives group policies. Effects: Deny, Audit, Append, DeployIfNotExists. Assign at management group, subscription, or resource group.` },
-        { question: 'Explain App Service plans.', answer: `Compute resources for web apps. Tiers: Free/Shared, Basic, Standard (autoscale/slots), Premium (VNet), Isolated. Apps in same plan share resources. Scale plan, not app.` },
-        { question: 'What is Azure Key Vault?', answer: `Centralized secrets, keys, certificates. HSM-backed option. RBAC or access policies. Integrate with Managed Identity. Soft delete, purge protection. Essential for security.` },
-        { question: 'How does Load Balancer differ from App Gateway?', answer: `Load Balancer: Layer 4 (TCP/UDP), fast, zones. App Gateway: Layer 7 (HTTP), URL routing, SSL offload, WAF. Use App Gateway for web, LB for other TCP.` },
-        { question: 'What is Azure Front Door?', answer: `Global HTTP load balancer + CDN + WAF. Anycast, fast failover. URL rewriting, caching. Premium has Private Link. Use for global web applications.` },
-        { question: 'Explain Azure RBAC.', answer: `Role-Based Access Control. Security principal + Role definition + Scope. Built-in: Owner, Contributor, Reader. Inheritance: Management Group → Subscription → RG → Resource.` },
-        { question: 'What are Management Groups?', answer: `Hierarchy above subscriptions. Apply policies, RBAC across subscriptions. Organize by department, environment, etc. Root management group at organization level.` },
-        { question: 'How do you implement DR in Azure?', answer: `Azure Site Recovery replicates VMs. Geo-redundant storage. Traffic Manager for DNS failover. Paired regions for compliance. Define RTO/RPO.` },
-        { question: 'What is Azure Service Bus?', answer: `Enterprise messaging. Queues (point-to-point), Topics (pub/sub). Sessions, dead-lettering, transactions. Better for enterprise patterns than Storage Queues.` },
-        { question: 'Explain Container Instances.', answer: `Run containers without VMs or K8s. Fast startup, per-second billing. Burst workloads, CI/CD, simple apps. Use AKS for production orchestration.` },
-        { question: 'What is Azure Sentinel?', answer: `Cloud-native SIEM + SOAR. Collects data, AI-powered detection, automated playbooks. Integrates with Microsoft security products. Pay per GB analyzed.` }
+        { question: 'What is the difference between Azure AD and AD DS?', answer: `AD DS: On-premises, LDAP, Kerberos, Group Policy.
+Azure AD: Cloud-based, REST/SAML/OAuth, no Group Policy, SSO for SaaS.
+Azure AD Connect syncs between them.` },
+        { question: 'Explain Availability Sets vs Zones.', answer: `Sets: Fault domains + Update domains within datacenter (99.95%).
+Zones: Separate datacenters in region (99.99%).
+Use Zones for production, Sets when Zones unavailable.` },
+        { question: 'What are Managed Identities?', answer: `Azure resource identity without credentials.
+System-assigned (tied to resource) or User-assigned (independent).
+Eliminates secrets in code.
+Use for accessing Key Vault, Storage, etc.` },
+        { question: 'How does VNet Peering work?', answer: `Private connectivity between VNets via Azure backbone.
+Non-transitive.
+Can span regions (global peering).
+Low latency.
+Traffic not free.
+Alternative: VPN Gateway.` },
+        { question: 'What is Azure Policy?', answer: `Governance service.
+Policies define rules, Initiatives group policies.
+Effects: Deny, Audit, Append, DeployIfNotExists.
+Assign at management group, subscription, or resource group.` },
+        { question: 'Explain App Service plans.', answer: `Compute resources for web apps.
+Tiers: Free/Shared, Basic, Standard (autoscale/slots), Premium (VNet), Isolated.
+Apps in same plan share resources.
+Scale plan, not app.` },
+        { question: 'What is Azure Key Vault?', answer: `Centralized secrets, keys, certificates.
+HSM-backed option.
+RBAC or access policies.
+Integrate with Managed Identity.
+Soft delete, purge protection.
+Essential for security.` },
+        { question: 'How does Load Balancer differ from App Gateway?', answer: `Load Balancer: Layer 4 (TCP/UDP), fast, zones.
+App Gateway: Layer 7 (HTTP), URL routing, SSL offload, WAF.
+Use App Gateway for web, LB for other TCP.` },
+        { question: 'What is Azure Front Door?', answer: `Global HTTP load balancer + CDN + WAF.
+Anycast, fast failover.
+URL rewriting, caching.
+Premium has Private Link.
+Use for global web applications.` },
+        { question: 'Explain Azure RBAC.', answer: `Role-Based Access Control.
+Security principal + Role definition + Scope.
+Built-in: Owner, Contributor, Reader.
+Inheritance: Management Group → Subscription → RG → Resource.` },
+        { question: 'What are Management Groups?', answer: `Hierarchy above subscriptions.
+Apply policies, RBAC across subscriptions.
+Organize by department, environment, etc.
+Root management group at organization level.` },
+        { question: 'How do you implement DR in Azure?', answer: `Azure Site Recovery replicates VMs.
+Geo-redundant storage.
+Traffic Manager for DNS failover.
+Paired regions for compliance.
+Define RTO/RPO.` },
+        { question: 'What is Azure Service Bus?', answer: `Enterprise messaging.
+Queues (point-to-point), Topics (pub/sub).
+Sessions, dead-lettering, transactions.
+Better for enterprise patterns than Storage Queues.` },
+        { question: 'Explain Container Instances.', answer: `Run containers without VMs or K8s.
+Fast startup, per-second billing.
+Burst workloads, CI/CD, simple apps.
+Use AKS for production orchestration.` },
+        { question: 'What is Azure Sentinel?', answer: `Cloud-native SIEM + SOAR.
+Collects data, AI-powered detection, automated playbooks.
+Integrates with Microsoft security products.
+Pay per GB analyzed.` }
     ]
 };

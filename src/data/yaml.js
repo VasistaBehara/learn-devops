@@ -330,21 +330,56 @@ jobs:
         }
     ],
     questions: [
-        { question: 'What is YAML used for?', answer: 'YAML is a human-readable data serialization format. Used for configuration files (Kubernetes, Docker, Ansible, CI/CD), data exchange, and structured documents. More readable than JSON or XML.' },
-        { question: 'What are the rules for YAML indentation?', answer: 'Use spaces only (no tabs). Consistent indentation (usually 2 spaces). Indentation defines structure/hierarchy. Children must be indented more than parents. Be consistent throughout the file.' },
-        { question: 'How do you represent null in YAML?', answer: 'Multiple ways: null keyword, tilde (~), or empty value. Examples: value: null, value: ~, or just value: (nothing after colon). All parse as null/None.' },
-        { question: 'What is the difference between | and > in YAML?', answer: '| (literal) preserves newlines exactly as written. > (folded) converts newlines to spaces, creating a single paragraph. Both preserve final newline by default; use |- or >- to strip it.' },
-        { question: 'How do anchors and aliases work?', answer: 'Anchors (&name) mark a value for reuse. Aliases (*name) reference the anchor. << with alias merges mappings. Reduces duplication. Useful for shared defaults across configurations.' },
-        { question: 'What is flow style vs block style?', answer: 'Block style uses indentation (multi-line, readable). Flow style uses brackets like JSON: {key: value} for maps, [a, b] for lists. Block is preferred for complex configs; flow for inline short values.' },
-        { question: 'How do you handle special characters in YAML strings?', answer: 'Use quotes when: starting with special chars (@, &, *, etc.), containing colons, containing #, needing escape sequences. Both single and double quotes work; double allows escapes.' },
-        { question: 'How do you write multi-line strings in YAML?', answer: 'Use | for literal (keeps newlines) or > for folded (joins lines). Add - to strip trailing newlines (|-), + to keep them (|+). Indent content under the indicator.' },
-        { question: 'What are common YAML mistakes?', answer: 'Using tabs instead of spaces. Inconsistent indentation. Missing quotes around special values. Forgetting yes/no are booleans. Treating version numbers as floats. Not escaping colons in strings.' },
-        { question: 'How do you validate YAML files?', answer: 'Use online validators, yamllint tool, or IDE plugins. yamllint checks syntax and style. Parse with Python PyYAML or yq to verify. Kubernetes: kubectl --dry-run for K8s YAML validation.' },
-        { question: 'What is the difference between YAML and JSON?', answer: 'YAML: more readable, supports comments, anchors/aliases, multi-line strings. JSON: stricter, more portable, no comments. YAML is a superset of JSON; valid JSON is valid YAML.' },
-        { question: 'How do you represent a list of objects in YAML?', answer: 'Use dashes for list items with nested key-value pairs. Each dash starts a new list item. Properties are indented under the dash. Common in Kubernetes manifests.' },
-        { question: 'What are YAML tags?', answer: 'Tags explicitly specify type: !!str forces string, !!int for integer, !!bool for boolean. Useful when automatic type detection is wrong: version: !!str 1.0 keeps it as string.' },
-        { question: 'How do you merge multiple YAML files?', answer: 'Use tools: yq, kustomize, or language-specific merging. Anchors work within single file only. Kustomize patches for Kubernetes. Helm values files merge automatically.' },
-        { question: 'What does --- mean in YAML?', answer: '--- separates multiple documents in one file. Each document is parsed independently. Common in Kubernetes (multiple resources) and config management. ... explicitly ends a document.' }
+        { question: 'What is YAML used for?', answer: `YAML is a human-readable data serialization format.
+Used for configuration files (Kubernetes, Docker, Ansible, CI/CD), data exchange, and structured documents.
+More readable than JSON or XML.` },
+        { question: 'What are the rules for YAML indentation?', answer: `Use spaces only (no tabs).
+Consistent indentation (usually 2 spaces).
+Indentation defines structure/hierarchy.
+Children must be indented more than parents.
+Be consistent throughout the file.` },
+        { question: 'How do you represent null in YAML?', answer: `Multiple ways: null keyword, tilde (~), or empty value.
+Examples: value: null, value: ~, or just value: (nothing after colon).
+All parse as null/None.` },
+        { question: 'What is the difference between | and > in YAML?', answer: `| (literal) preserves newlines exactly as written. > (folded) converts newlines to spaces, creating a single paragraph.
+Both preserve final newline by default; use |- or >- to strip it.` },
+        { question: 'How do anchors and aliases work?', answer: `Anchors (&name) mark a value for reuse.
+Aliases (*name) reference the anchor. << with alias merges mappings.
+Reduces duplication.
+Useful for shared defaults across configurations.` },
+        { question: 'What is flow style vs block style?', answer: `Block style uses indentation (multi-line, readable).
+Flow style uses brackets like JSON: {key: value} for maps, [a, b] for lists.
+Block is preferred for complex configs; flow for inline short values.` },
+        { question: 'How do you handle special characters in YAML strings?', answer: `Use quotes when: starting with special chars (@, &, *, etc.), containing colons, containing #, needing escape sequences.
+Both single and double quotes work; double allows escapes.` },
+        { question: 'How do you write multi-line strings in YAML?', answer: `Use | for literal (keeps newlines) or > for folded (joins lines).
+Add - to strip trailing newlines (|-), + to keep them (|+).
+Indent content under the indicator.` },
+        { question: 'What are common YAML mistakes?', answer: `Using tabs instead of spaces.
+Inconsistent indentation.
+Missing quotes around special values.
+Forgetting yes/no are booleans.
+Treating version numbers as floats.
+Not escaping colons in strings.` },
+        { question: 'How do you validate YAML files?', answer: `Use online validators, yamllint tool, or IDE plugins. yamllint checks syntax and style.
+Parse with Python PyYAML or yq to verify.
+Kubernetes: kubectl --dry-run for K8s YAML validation.` },
+        { question: 'What is the difference between YAML and JSON?', answer: `YAML: more readable, supports comments, anchors/aliases, multi-line strings.
+JSON: stricter, more portable, no comments.
+YAML is a superset of JSON; valid JSON is valid YAML.` },
+        { question: 'How do you represent a list of objects in YAML?', answer: `Use dashes for list items with nested key-value pairs.
+Each dash starts a new list item.
+Properties are indented under the dash.
+Common in Kubernetes manifests.` },
+        { question: 'What are YAML tags?', answer: `Tags explicitly specify type: !!str forces string, !!int for integer, !!bool for boolean.
+Useful when automatic type detection is wrong: version: !!str 1.0 keeps it as string.` },
+        { question: 'How do you merge multiple YAML files?', answer: `Use tools: yq, kustomize, or language-specific merging.
+Anchors work within single file only.
+Kustomize patches for Kubernetes.
+Helm values files merge automatically.` },
+        { question: 'What does --- mean in YAML?', answer: `--- separates multiple documents in one file.
+Each document is parsed independently.
+Common in Kubernetes (multiple resources) and config management. ... explicitly ends a document.` }
     ]
 };
 

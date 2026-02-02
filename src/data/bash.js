@@ -642,26 +642,78 @@ main "$@"
         }
     ],
     questions: [
-        { question: 'What does set -euo pipefail do?', answer: '-e: exit on error, -u: error on undefined variables, -o pipefail: pipeline fails if any command fails. These options make scripts fail fast instead of silently continuing with errors.' },
-        { question: 'What is the difference between $@ and $*?', answer: '$@ expands to separate quoted arguments ("$1" "$2"), preserving spaces in args. $* expands to a single string. In loops, always use "$@" to handle arguments with spaces correctly.' },
-        { question: 'How do you handle spaces in filenames?', answer: 'Always quote variables: "$file". Use find with -print0 and xargs with -0. Set IFS carefully. Use arrays instead of string splitting. Avoid for file in $(ls).' },
+        { question: 'What does set -euo pipefail do?', answer: `-e: exit on error, -u: error on undefined variables, -o pipefail: pipeline fails if any command fails.
+These options make scripts fail fast instead of silently continuing with errors.` },
+        { question: 'What is the difference between $@ and $*?', answer: `$@ expands to separate quoted arguments ("$1" "$2"), preserving spaces in args. $* expands to a single string.
+In loops, always use "$@" to handle arguments with spaces correctly.` },
+        { question: 'How do you handle spaces in filenames?', answer: `Always quote variables: "$file".
+Use find with -print0 and xargs with -0.
+Set IFS carefully.
+Use arrays instead of string splitting.
+Avoid for file in $(ls).` },
         { question: 'What is the difference between [ ] and [[ ]]?', answer: '[[ ]] is bash-specific, supports regex (=~), pattern matching, and doesn\'t require quoting variables. [ ] is POSIX but needs careful quoting and escaping.' },
-        { question: 'How do you debug a bash script?', answer: 'Use set -x for command tracing, set -v for line printing. Run with bash -x script.sh. Use trap for debugging. Check syntax with bash -n. Use shellcheck for static analysis.' },
-        { question: 'What is the difference between sourcing and executing a script?', answer: 'Executing (./script.sh) runs in a subshell; changes don\'t affect parent. Sourcing (source script.sh or . script.sh) runs in current shell; environment changes persist. Use source for configs.' },
-        { question: 'How do you pass and return values from functions?', answer: 'Pass arguments positionally ($1, $2). Return values via echo and capture with $(). Return codes indicate success/failure (0-255). Don\'t use return for data, only status codes.' },
-        { question: 'What is a here document?', answer: 'Here documents (<<EOF...EOF) provide multi-line input to commands. <<-EOF allows indentation. <<"EOF" prevents variable expansion. Useful for embedded content, SQL, templates.' },
-        { question: 'How do you handle signals in bash?', answer: 'Use trap to catch signals: trap cleanup EXIT for cleanup on exit, trap handler SIGINT for Ctrl+C. Common signals: INT, TERM, HUP, EXIT, ERR. Trap ERR with set -e for custom error handling.' },
-        { question: 'What is process substitution?', answer: 'Process substitution <(command) creates a pseudo-file from command output. Useful when a program requires file input: diff <(sort file1) <(sort file2). >(command) pipes to a process.' },
-        { question: 'How do you parse command line arguments?', answer: 'Use getopts for short options, getopt for long options. Access positional args with $1, $2. Use shift to iterate. $# counts arguments. Always validate required arguments.' },
-        { question: 'What is the difference between && and ;?', answer: '&& runs next command only if previous succeeded (exit 0). ; runs next command regardless of previous result. Use && for dependent commands, ; for independent.' },
-        { question: 'How do you make a script portable?', answer: 'Use #!/usr/bin/env bash. Stick to POSIX when possible. Check for command availability. Avoid bash-specific features for /bin/sh. Test on target systems. Use printf over echo.' },
-        { question: 'What is command substitution?', answer: '$(command) or backticks execute command and substitute output. Use $() as it\'s nestable and clearer. Examples: TODAY=$(date), FILES=$(ls *.txt | wc -l).' },
-        { question: 'How do you handle errors in bash?', answer: 'Use set -e to exit on errors. Check $? for last exit code. Use || for fallback commands. Use trap ERR for custom handlers. Validate inputs early. Use die functions for consistent error messages.' },
-        { question: 'What are the best practices for bash scripts?', answer: 'Use set -euo pipefail. Quote all variables. Use functions. Add comments and usage docs. Use shellcheck. Use meaningful variable names. Handle cleanup with trap. Validate inputs. Use version control.' },
-        { question: 'How do you work with JSON in bash?', answer: 'Use jq for JSON parsing and manipulation. jq -r for raw output. Combine with curl for API work. Use --arg to pass shell variables. Can create, filter, and transform JSON.' },
-        { question: 'What is the difference between local and global variables?', answer: 'local variables exist only within a function and don\'t affect outer scope. Without local, variables are global. Always use local in functions to avoid side effects and naming conflicts.' },
-        { question: 'How do you run commands in parallel?', answer: 'Use & to background processes. wait for completion. xargs -P for parallel processing. GNU parallel for advanced needs. Limit concurrent jobs to avoid resource exhaustion.' },
-        { question: 'What is shellcheck and why use it?', answer: 'Shellcheck is a static analysis tool that finds bugs, portability issues, and style problems in shell scripts. It catches quoting errors, undefined variables, and common pitfalls. Essential for CI/CD.' }
+        { question: 'How do you debug a bash script?', answer: `Use set -x for command tracing, set -v for line printing.
+Run with bash -x script.sh.
+Use trap for debugging.
+Check syntax with bash -n.
+Use shellcheck for static analysis.` },
+        { question: 'What is the difference between sourcing and executing a script?', answer: `Executing (./script.sh) runs in a subshell; changes don't affect parent.
+Sourcing (source script.sh or . script.sh) runs in current shell; environment changes persist.
+Use source for configs.` },
+        { question: 'How do you pass and return values from functions?', answer: `Pass arguments positionally ($1, $2).
+Return values via echo and capture with $().
+Return codes indicate success/failure (0-255).
+Don't use return for data, only status codes.` },
+        { question: 'What is a here document?', answer: `Here documents (<<EOF...EOF) provide multi-line input to commands. <<-EOF allows indentation. <<"EOF" prevents variable expansion.
+Useful for embedded content, SQL, templates.` },
+        { question: 'How do you handle signals in bash?', answer: `Use trap to catch signals: trap cleanup EXIT for cleanup on exit, trap handler SIGINT for Ctrl+C.
+Common signals: INT, TERM, HUP, EXIT, ERR.
+Trap ERR with set -e for custom error handling.` },
+        { question: 'What is process substitution?', answer: `Process substitution <(command) creates a pseudo-file from command output.
+Useful when a program requires file input: diff <(sort file1) <(sort file2). >(command) pipes to a process.` },
+        { question: 'How do you parse command line arguments?', answer: `Use getopts for short options, getopt for long options.
+Access positional args with $1, $2.
+Use shift to iterate. $# counts arguments.
+Always validate required arguments.` },
+        { question: 'What is the difference between && and ;?', answer: `&& runs next command only if previous succeeded (exit 0). ; runs next command regardless of previous result.
+Use && for dependent commands, ; for independent.` },
+        { question: 'How do you make a script portable?', answer: `Use #!/usr/bin/env bash.
+Stick to POSIX when possible.
+Check for command availability.
+Avoid bash-specific features for /bin/sh.
+Test on target systems.
+Use printf over echo.` },
+        { question: 'What is command substitution?', answer: `$(command) or backticks execute command and substitute output.
+Use $() as it's nestable and clearer.
+Examples: TODAY=$(date), FILES=$(ls *.txt | wc -l).` },
+        { question: 'How do you handle errors in bash?', answer: `Use set -e to exit on errors.
+Check $? for last exit code.
+Use || for fallback commands.
+Use trap ERR for custom handlers.
+Validate inputs early.
+Use die functions for consistent error messages.` },
+        { question: 'What are the best practices for bash scripts?', answer: `Use set -euo pipefail.
+Quote all variables.
+Use functions.
+Add comments and usage docs.
+Use shellcheck.
+Use meaningful variable names.
+Handle cleanup with trap.
+Validate inputs.
+Use version control.` },
+        { question: 'How do you work with JSON in bash?', answer: `Use jq for JSON parsing and manipulation. jq -r for raw output.
+Combine with curl for API work.
+Use --arg to pass shell variables.
+Can create, filter, and transform JSON.` },
+        { question: 'What is the difference between local and global variables?', answer: `local variables exist only within a function and don't affect outer scope.
+Without local, variables are global.
+Always use local in functions to avoid side effects and naming conflicts.` },
+        { question: 'How do you run commands in parallel?', answer: `Use & to background processes. wait for completion. xargs -P for parallel processing.
+GNU parallel for advanced needs.
+Limit concurrent jobs to avoid resource exhaustion.` },
+        { question: 'What is shellcheck and why use it?', answer: `Shellcheck is a static analysis tool that finds bugs, portability issues, and style problems in shell scripts.
+It catches quoting errors, undefined variables, and common pitfalls.
+Essential for CI/CD.` }
     ]
 };
 

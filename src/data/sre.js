@@ -192,20 +192,81 @@ Alert fatigue is real. Review and tune alerts. Track pager load metrics.`,
         }
     ],
     questions: [
-        { question: 'What is the difference between SLI, SLO, and SLA?', answer: `SLI: Metric (what you measure). SLO: Target (internal goal). SLA: Contract (external commitment with consequences). Start with SLIs, set SLOs slightly stricter than SLAs.` },
-        { question: 'Explain error budgets.', answer: `Error budget = 100% - SLO. Represents acceptable unreliability. When depleted, freeze features, improve reliability. Balances velocity vs stability. Shared between product and SRE.` },
-        { question: 'What is toil and how do you eliminate it?', answer: `Toil: Manual, repetitive, automatable, no lasting value, scales with service. Keep < 50% of time. Identify, measure, automate. Prioritize by frequency and impact.` },
-        { question: 'How do you approach blameless postmortems?', answer: `Focus on systems, not people. Assume good intentions. Ask "how did system allow this?" not "who caused this?". Psychological safety essential. Action items improve systems.` },
-        { question: 'What makes a good SLO?', answer: `User-focused (measures what matters to users). Achievable (realistic). Measurable (automated tracking). Meaningful (drives decisions). Not 100% (allows error budget for innovation).` },
-        { question: 'Explain the USE and RED methods.', answer: `USE (resources): Utilization, Saturation, Errors. Good for infrastructure. RED (services): Rate, Errors, Duration. Good for services. Use together for complete picture.` },
-        { question: 'What is a good on-call rotation?', answer: `Fair distribution. 1-2 week shifts. Avoid single points of failure. Clear escalation. Runbooks. Compensation. < 2 pages per shift target. Regular review of pager load.` },
-        { question: 'How do you reduce alert fatigue?', answer: `Only actionable alerts. Remove noisy alerts. Set appropriate thresholds. Group related alerts. Require action items for every page. Review alert effectiveness regularly.` },
-        { question: 'What is chaos engineering?', answer: `Controlled failures to find weaknesses. Hypothesis-driven experiments. Start small, minimize blast radius. Build confidence in resilience. Tools: Chaos Monkey, Gremlin.` },
-        { question: 'How do you handle an incident?', answer: `Acknowledge quickly. Assign roles (IC, Comms, Ops). Mitigate first, debug later. Communicate frequently. Document in real-time. Escalate early. Postmortem after.` },
-        { question: 'What is the difference between SRE and DevOps?', answer: `DevOps: Culture, practices, breaking silos. SRE: Specific implementation using software engineering. SRE is a way to implement DevOps. SRE has specific practices (SLOs, error budgets).` },
-        { question: 'How do you measure reliability?', answer: `Define SLIs (availability, latency, error rate). Set SLOs. Track error budget consumption. MTTR, MTBF for incidents. User-facing metrics over infrastructure metrics.` },
-        { question: 'Explain capacity planning.', answer: `Forecast demand based on growth. Measure current capacity. Add headroom and redundancy. Account for lead time. Load test to validate. Regular reviews.` },
-        { question: 'What is golden signals?', answer: `Four key metrics: Latency, Traffic, Errors, Saturation. From Google SRE book. Covers most monitoring needs. Start dashboards and alerts with these.` },
-        { question: 'How do you balance feature development and reliability?', answer: `Error budget is the balance. Features ship when budget allows. Reliability work when budget depleted. Product and SRE both accountable. SLO is data-driven decision point.` }
+        { question: 'What is the difference between SLI, SLO, and SLA?', answer: `SLI: Metric (what you measure).
+SLO: Target (internal goal).
+SLA: Contract (external commitment with consequences).
+Start with SLIs, set SLOs slightly stricter than SLAs.` },
+        { question: 'Explain error budgets.', answer: `Error budget = 100% - SLO.
+Represents acceptable unreliability.
+When depleted, freeze features, improve reliability.
+Balances velocity vs stability.
+Shared between product and SRE.` },
+        { question: 'What is toil and how do you eliminate it?', answer: `Toil: Manual, repetitive, automatable, no lasting value, scales with service.
+Keep < 50% of time.
+Identify, measure, automate.
+Prioritize by frequency and impact.` },
+        { question: 'How do you approach blameless postmortems?', answer: `Focus on systems, not people.
+Assume good intentions.
+Ask "how did system allow this?" not "who caused this?".
+Psychological safety essential.
+Action items improve systems.` },
+        { question: 'What makes a good SLO?', answer: `User-focused (measures what matters to users).
+Achievable (realistic).
+Measurable (automated tracking).
+Meaningful (drives decisions).
+Not 100% (allows error budget for innovation).` },
+        { question: 'Explain the USE and RED methods.', answer: `USE (resources): Utilization, Saturation, Errors.
+Good for infrastructure.
+RED (services): Rate, Errors, Duration.
+Good for services.
+Use together for complete picture.` },
+        { question: 'What is a good on-call rotation?', answer: `Fair distribution. 1-2 week shifts.
+Avoid single points of failure.
+Clear escalation.
+Runbooks.
+Compensation. < 2 pages per shift target.
+Regular review of pager load.` },
+        { question: 'How do you reduce alert fatigue?', answer: `Only actionable alerts.
+Remove noisy alerts.
+Set appropriate thresholds.
+Group related alerts.
+Require action items for every page.
+Review alert effectiveness regularly.` },
+        { question: 'What is chaos engineering?', answer: `Controlled failures to find weaknesses.
+Hypothesis-driven experiments.
+Start small, minimize blast radius.
+Build confidence in resilience.
+Tools: Chaos Monkey, Gremlin.` },
+        { question: 'How do you handle an incident?', answer: `Acknowledge quickly.
+Assign roles (IC, Comms, Ops).
+Mitigate first, debug later.
+Communicate frequently.
+Document in real-time.
+Escalate early.
+Postmortem after.` },
+        { question: 'What is the difference between SRE and DevOps?', answer: `DevOps: Culture, practices, breaking silos.
+SRE: Specific implementation using software engineering.
+SRE is a way to implement DevOps.
+SRE has specific practices (SLOs, error budgets).` },
+        { question: 'How do you measure reliability?', answer: `Define SLIs (availability, latency, error rate).
+Set SLOs.
+Track error budget consumption.
+MTTR, MTBF for incidents.
+User-facing metrics over infrastructure metrics.` },
+        { question: 'Explain capacity planning.', answer: `Forecast demand based on growth.
+Measure current capacity.
+Add headroom and redundancy.
+Account for lead time.
+Load test to validate.
+Regular reviews.` },
+        { question: 'What is golden signals?', answer: `Four key metrics: Latency, Traffic, Errors, Saturation.
+From Google SRE book.
+Covers most monitoring needs.
+Start dashboards and alerts with these.` },
+        { question: 'How do you balance feature development and reliability?', answer: `Error budget is the balance.
+Features ship when budget allows.
+Reliability work when budget depleted.
+Product and SRE both accountable.
+SLO is data-driven decision point.` }
     ]
 };

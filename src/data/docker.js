@@ -142,20 +142,56 @@ docker system prune -a               # Cleanup all unused` }
         }
     ],
     questions: [
-        { question: 'What is the difference between a container and a VM?', answer: `VMs: Full OS per instance, hypervisor, heavier, slower startup. Containers: Share host kernel, lighter, seconds to start, less isolation. Containers for apps, VMs for different OSes or strong isolation.` },
-        { question: 'Explain Docker layers and caching.', answer: `Each Dockerfile instruction creates a layer. Layers are cached and reused. Changing a layer invalidates subsequent layers. Order matters: put rarely-changing (deps) before often-changing (code).` },
-        { question: 'What is the difference between CMD and ENTRYPOINT?', answer: `CMD: Default command, can be overridden at run. ENTRYPOINT: Always executes, CMD becomes arguments. Use together: ENTRYPOINT for command, CMD for default args. exec form preferred.` },
-        { question: 'How do you reduce Docker image size?', answer: `Use alpine/slim bases. Multi-stage builds. Combine RUN commands. Remove caches (rm -rf /var/lib/apt/lists/*). Use .dockerignore. Don't install unnecessary packages.` },
-        { question: 'Explain Docker networking modes.', answer: `bridge: Default, isolated network. host: Uses host network directly. none: No networking. overlay: Multi-host (Swarm). macvlan: Direct MAC address. Bridge for most apps.` },
-        { question: 'What is the difference between COPY and ADD?', answer: `COPY: Simple file copy. ADD: Also extracts tar archives, supports URLs (not recommended). Use COPY unless you need tar extraction. More predictable.` },
-        { question: 'How do volumes differ from bind mounts?', answer: `Volumes: Docker-managed, named, portable, recommended for data. Bind mounts: Map host path, useful for development. tmpfs: Memory only, not persisted.` },
-        { question: 'What is Docker Compose used for?', answer: `Define multi-container apps in YAML. Single command (docker compose up) starts all services. Manages networks, volumes, dependencies. Great for development and testing.` },
-        { question: 'How do you handle secrets in Docker?', answer: `Avoid env vars (visible in inspect). Docker secrets (Swarm). Mount secrets as files. External secret managers (Vault). Never bake secrets into images.` },
-        { question: 'Explain multi-stage builds.', answer: `Multiple FROM statements. Build in one stage, copy artifacts to minimal final stage. Reduces image size drastically. Example: Build with SDK, run with runtime-only image.` },
+        { question: 'What is the difference between a container and a VM?', answer: `VMs: Full OS per instance, hypervisor, heavier, slower startup.
+Containers: Share host kernel, lighter, seconds to start, less isolation.
+Containers for apps, VMs for different OSes or strong isolation.` },
+        { question: 'Explain Docker layers and caching.', answer: `Each Dockerfile instruction creates a layer.
+Layers are cached and reused.
+Changing a layer invalidates subsequent layers.
+Order matters: put rarely-changing (deps) before often-changing (code).` },
+        { question: 'What is the difference between CMD and ENTRYPOINT?', answer: `CMD: Default command, can be overridden at run.
+ENTRYPOINT: Always executes, CMD becomes arguments.
+Use together: ENTRYPOINT for command, CMD for default args. exec form preferred.` },
+        { question: 'How do you reduce Docker image size?', answer: `Use alpine/slim bases.
+Multi-stage builds.
+Combine RUN commands.
+Remove caches (rm -rf /var/lib/apt/lists/*).
+Use .dockerignore.
+Don't install unnecessary packages.` },
+        { question: 'Explain Docker networking modes.', answer: `bridge: Default, isolated network. host: Uses host network directly. none: No networking. overlay: Multi-host (Swarm). macvlan: Direct MAC address.
+Bridge for most apps.` },
+        { question: 'What is the difference between COPY and ADD?', answer: `COPY: Simple file copy.
+ADD: Also extracts tar archives, supports URLs (not recommended).
+Use COPY unless you need tar extraction.
+More predictable.` },
+        { question: 'How do volumes differ from bind mounts?', answer: `Volumes: Docker-managed, named, portable, recommended for data.
+Bind mounts: Map host path, useful for development. tmpfs: Memory only, not persisted.` },
+        { question: 'What is Docker Compose used for?', answer: `Define multi-container apps in YAML.
+Single command (docker compose up) starts all services.
+Manages networks, volumes, dependencies.
+Great for development and testing.` },
+        { question: 'How do you handle secrets in Docker?', answer: `Avoid env vars (visible in inspect).
+Docker secrets (Swarm).
+Mount secrets as files.
+External secret managers (Vault).
+Never bake secrets into images.` },
+        { question: 'Explain multi-stage builds.', answer: `Multiple FROM statements.
+Build in one stage, copy artifacts to minimal final stage.
+Reduces image size drastically.
+Example: Build with SDK, run with runtime-only image.` },
         { question: 'How do you debug a running container?', answer: `docker exec -it <id> /bin/sh: Shell access. docker logs -f: Follow logs. docker inspect: Detailed info. docker stats: Resource usage. docker cp: Copy files in/out.` },
         { question: 'What is the difference between docker run and docker start?', answer: `run: Creates and starts new container from image. start: Starts existing stopped container. run creates container each time; start reuses existing.` },
-        { question: 'How do health checks work?', answer: `HEALTHCHECK instruction or --health-cmd. Runs command periodically. Container marked healthy/unhealthy. Orchestrators use for readiness/restart decisions.` },
-        { question: 'What is a dangling image?', answer: `Untagged images, often from rebuilds. Listed as <none>:<none>. Clean with docker image prune. They consume disk space. Can accumulate without cleanup.` },
-        { question: 'How do you limit container resources?', answer: `--memory: RAM limit. --cpus: CPU limit. --memory-swap: Swap limit. Without limits, containers can consume all host resources. Important for production.` }
+        { question: 'How do health checks work?', answer: `HEALTHCHECK instruction or --health-cmd.
+Runs command periodically.
+Container marked healthy/unhealthy.
+Orchestrators use for readiness/restart decisions.` },
+        { question: 'What is a dangling image?', answer: `Untagged images, often from rebuilds.
+Listed as <none>:<none>.
+Clean with docker image prune.
+They consume disk space.
+Can accumulate without cleanup.` },
+        { question: 'How do you limit container resources?', answer: `--memory: RAM limit. --cpus: CPU limit. --memory-swap: Swap limit.
+Without limits, containers can consume all host resources.
+Important for production.` }
     ]
 };

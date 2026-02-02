@@ -228,30 +228,108 @@ aws events put-targets --rule my-rule \\
         }
     ],
     questions: [
-        { question: 'What is the difference between Security Groups and NACLs?', answer: `Security Groups: Instance level, stateful, allow rules only, all rules evaluated. NACLs: Subnet level, stateless, allow/deny rules, rules processed in order. Use SGs as primary defense.` },
-        { question: 'Explain horizontal vs vertical scaling.', answer: `Vertical: Increase instance size (scale up). Requires restart. Has limits. Horizontal: Add more instances (scale out). Use Auto Scaling + Load Balancer. Preferred for HA.` },
+        { question: 'What is the difference between Security Groups and NACLs?', answer: `Security Groups: Instance level, stateful, allow rules only, all rules evaluated.
+NACLs: Subnet level, stateless, allow/deny rules, rules processed in order.
+Use SGs as primary defense.` },
+        { question: 'Explain horizontal vs vertical scaling.', answer: `Vertical: Increase instance size (scale up).
+Requires restart.
+Has limits.
+Horizontal: Add more instances (scale out).
+Use Auto Scaling + Load Balancer.
+Preferred for HA.` },
         { question: 'What are S3 storage classes?', answer: `Standard (frequent), Intelligent-Tiering (unknown patterns), Standard-IA (infrequent), One Zone-IA (reproducible), Glacier Instant (ms retrieval), Glacier Flexible (min-hours), Deep Archive (12-48h).` },
-        { question: 'How does Lambda cold start work?', answer: `First invocation: Download code, start environment, init runtime. Adds 100ms-seconds. Mitigate: Provisioned Concurrency, smaller packages, lighter runtimes, SnapStart (Java).` },
-        { question: 'Explain least privilege in IAM.', answer: `Grant only permissions needed. Start with none, add as required. Specific resources over wildcards. Use conditions. Regular audits with Access Analyzer. Prefer roles over users.` },
-        { question: 'What is VPC Peering and its limitations?', answer: `Private IP connectivity between VPCs. No transitive peering (A-B, B-C doesn't give A-C). No overlapping CIDRs. Doesn't extend to VPN/Direct Connect. Use Transit Gateway for hub-and-spoke.` },
-        { question: 'How do you implement RDS high availability?', answer: `Multi-AZ: Synchronous standby, automatic failover (60-120s). Read replicas for read scaling (async). Aurora: 6 copies across 3 AZs, <30s failover.` },
-        { question: 'What is the difference between ECS and EKS?', answer: `ECS: AWS-native, simpler, free control plane, deep AWS integration. EKS: Managed Kubernetes, portable, larger ecosystem, control plane cost. Choose ECS for simplicity, EKS for K8s compatibility.` },
-        { question: 'How does Auto Scaling work?', answer: `Launch Template + Auto Scaling Group + Scaling Policies. Policies: Target Tracking (maintain metric), Step (threshold-based), Scheduled, Predictive. Spans AZs. Health checks replace unhealthy.` },
-        { question: 'What are the Well-Architected Framework pillars?', answer: `Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability. Each has design principles and best practices. Use Well-Architected Tool for review.` },
-        { question: 'Explain Direct Connect vs VPN.', answer: `Direct Connect: Dedicated fiber, consistent bandwidth, lower latency, weeks to provision, higher cost. VPN: Over internet, variable bandwidth, quick setup, lower cost. Use VPN as DC backup.` },
-        { question: 'What is CloudTrail?', answer: `Records API calls across account. Management events (control plane) and data events (S3/Lambda). Store in S3, analyze with Athena. Enable multi-region, log file validation! for security auditing.` },
-        { question: 'How do you optimize AWS costs?', answer: `Right-sizing with Compute Optimizer. Reserved Instances/Savings Plans (up to 72%). Spot for fault-tolerant. S3 lifecycle policies. Turn off non-prod. Use Cost Explorer and Budgets.` },
-        { question: 'What is the shared responsibility model?', answer: `AWS: Security OF cloud (physical, infrastructure, managed services). Customer: Security IN cloud (data, access, OS patching, firewall). Varies by service type (IaaS vs PaaS vs SaaS).` },
-        { question: 'Explain ALB vs NLB.', answer: `ALB: Layer 7 (HTTP/S), path/host routing, WebSocket, Lambda targets. NLB: Layer 4 (TCP/UDP), ultra-low latency, static IP, TLS passthrough. Use ALB for web, NLB for non-HTTP or extreme performance.` },
-        { question: 'What is DynamoDB and when to use it?', answer: `Serverless NoSQL. Key-value/document. Single-digit ms. Auto-scales. Use for: Session data, gaming leaderboards, IoT, real-time apps. Not for: Complex queries, transactions across items, ACID requirements.` },
-        { question: 'How does S3 replication work?', answer: `Cross-Region (CRR) or Same-Region (SRR). Requires versioning. Replicates new objects. Can replicate delete markers. Use for: DR, compliance, latency reduction, log aggregation.` },
-        { question: 'What is AWS Organizations?', answer: `Centrally manage multiple accounts. Consolidated billing, volume discounts. SCPs (Service Control Policies) restrict account permissions. OUs for hierarchical organization.` },
-        { question: 'Explain SNS vs SQS.', answer: `SNS: Pub/sub, push-based, fan-out to multiple subscribers. SQS: Queue, pull-based, decouple producers/consumers. Use together: SNS to SQS for reliable fan-out with buffering.` },
-        { question: 'What are Reserved Instances vs Savings Plans?', answer: `RIs: Specific instance type/region, up to 72% discount, 1-3 years. Savings Plans: Committed spend/hour, more flexible, applies to EC2/Lambda/Fargate. Savings Plans generally preferred.` },
-        { question: 'How does CloudFront work?', answer: `CDN with edge locations worldwide. Caches content near users. Origins: S3, ALB, custom. TTL controls caching. Lambda@Edge for edge compute. OAC secures S3 access.` },
-        { question: 'What is EventBridge?', answer: `Serverless event bus. Connect AWS services, SaaS, custom apps via events. Rules filter and route. Targets: Lambda, SQS, Step Functions. Schema registry. Better than CloudWatch Events.` },
-        { question: 'Explain KMS vs CloudHSM.', answer: `KMS: Managed, multi-tenant, integrated with AWS services, $1/key/month. CloudHSM: Dedicated hardware, single-tenant, FIPS 140-2 Level 3, compliance requirements. KMS for most, CloudHSM for strict compliance.` },
-        { question: 'What is AWS WAF?', answer: `Web Application Firewall. Protects CloudFront, ALB, API Gateway. Rules: SQL injection, XSS, rate limiting, IP filtering. Managed rule groups available. Use with Shield for DDoS.` },
-        { question: 'How do you secure data at rest in AWS?', answer: `S3: SSE-S3, SSE-KMS, SSE-C, client-side. EBS: Encrypted volumes. RDS: Encryption at creation. KMS manages keys. Enable encryption by default. Can't encrypt unencrypted resources in-place.` }
+        { question: 'How does Lambda cold start work?', answer: `First invocation: Download code, start environment, init runtime.
+Adds 100ms-seconds.
+Mitigate: Provisioned Concurrency, smaller packages, lighter runtimes, SnapStart (Java).` },
+        { question: 'Explain least privilege in IAM.', answer: `Grant only permissions needed.
+Start with none, add as required.
+Specific resources over wildcards.
+Use conditions.
+Regular audits with Access Analyzer.
+Prefer roles over users.` },
+        { question: 'What is VPC Peering and its limitations?', answer: `Private IP connectivity between VPCs.
+No transitive peering (A-B, B-C doesn't give A-C).
+No overlapping CIDRs.
+Doesn't extend to VPN/Direct Connect.
+Use Transit Gateway for hub-and-spoke.` },
+        { question: 'How do you implement RDS high availability?', answer: `Multi-AZ: Synchronous standby, automatic failover (60-120s).
+Read replicas for read scaling (async).
+Aurora: 6 copies across 3 AZs, <30s failover.` },
+        { question: 'What is the difference between ECS and EKS?', answer: `ECS: AWS-native, simpler, free control plane, deep AWS integration.
+EKS: Managed Kubernetes, portable, larger ecosystem, control plane cost.
+Choose ECS for simplicity, EKS for K8s compatibility.` },
+        { question: 'How does Auto Scaling work?', answer: `Launch Template + Auto Scaling Group + Scaling Policies.
+Policies: Target Tracking (maintain metric), Step (threshold-based), Scheduled, Predictive.
+Spans AZs.
+Health checks replace unhealthy.` },
+        { question: 'What are the Well-Architected Framework pillars?', answer: `Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability.
+Each has design principles and best practices.
+Use Well-Architected Tool for review.` },
+        { question: 'Explain Direct Connect vs VPN.', answer: `Direct Connect: Dedicated fiber, consistent bandwidth, lower latency, weeks to provision, higher cost.
+VPN: Over internet, variable bandwidth, quick setup, lower cost.
+Use VPN as DC backup.` },
+        { question: 'What is CloudTrail?', answer: `Records API calls across account.
+Management events (control plane) and data events (S3/Lambda).
+Store in S3, analyze with Athena.
+Enable multi-region, log file validation! for security auditing.` },
+        { question: 'How do you optimize AWS costs?', answer: `Right-sizing with Compute Optimizer.
+Reserved Instances/Savings Plans (up to 72%).
+Spot for fault-tolerant.
+S3 lifecycle policies.
+Turn off non-prod.
+Use Cost Explorer and Budgets.` },
+        { question: 'What is the shared responsibility model?', answer: `AWS: Security OF cloud (physical, infrastructure, managed services).
+Customer: Security IN cloud (data, access, OS patching, firewall).
+Varies by service type (IaaS vs PaaS vs SaaS).` },
+        { question: 'Explain ALB vs NLB.', answer: `ALB: Layer 7 (HTTP/S), path/host routing, WebSocket, Lambda targets.
+NLB: Layer 4 (TCP/UDP), ultra-low latency, static IP, TLS passthrough.
+Use ALB for web, NLB for non-HTTP or extreme performance.` },
+        { question: 'What is DynamoDB and when to use it?', answer: `Serverless NoSQL.
+Key-value/document.
+Single-digit ms.
+Auto-scales.
+Use for: Session data, gaming leaderboards, IoT, real-time apps.
+Not for: Complex queries, transactions across items, ACID requirements.` },
+        { question: 'How does S3 replication work?', answer: `Cross-Region (CRR) or Same-Region (SRR).
+Requires versioning.
+Replicates new objects.
+Can replicate delete markers.
+Use for: DR, compliance, latency reduction, log aggregation.` },
+        { question: 'What is AWS Organizations?', answer: `Centrally manage multiple accounts.
+Consolidated billing, volume discounts.
+SCPs (Service Control Policies) restrict account permissions.
+OUs for hierarchical organization.` },
+        { question: 'Explain SNS vs SQS.', answer: `SNS: Pub/sub, push-based, fan-out to multiple subscribers.
+SQS: Queue, pull-based, decouple producers/consumers.
+Use together: SNS to SQS for reliable fan-out with buffering.` },
+        { question: 'What are Reserved Instances vs Savings Plans?', answer: `RIs: Specific instance type/region, up to 72% discount, 1-3 years.
+Savings Plans: Committed spend/hour, more flexible, applies to EC2/Lambda/Fargate.
+Savings Plans generally preferred.` },
+        { question: 'How does CloudFront work?', answer: `CDN with edge locations worldwide.
+Caches content near users.
+Origins: S3, ALB, custom.
+TTL controls caching.
+Lambda@Edge for edge compute.
+OAC secures S3 access.` },
+        { question: 'What is EventBridge?', answer: `Serverless event bus.
+Connect AWS services, SaaS, custom apps via events.
+Rules filter and route.
+Targets: Lambda, SQS, Step Functions.
+Schema registry.
+Better than CloudWatch Events.` },
+        { question: 'Explain KMS vs CloudHSM.', answer: `KMS: Managed, multi-tenant, integrated with AWS services, $1/key/month.
+CloudHSM: Dedicated hardware, single-tenant, FIPS 140-2 Level 3, compliance requirements.
+KMS for most, CloudHSM for strict compliance.` },
+        { question: 'What is AWS WAF?', answer: `Web Application Firewall.
+Protects CloudFront, ALB, API Gateway.
+Rules: SQL injection, XSS, rate limiting, IP filtering.
+Managed rule groups available.
+Use with Shield for DDoS.` },
+        { question: 'How do you secure data at rest in AWS?', answer: `S3: SSE-S3, SSE-KMS, SSE-C, client-side.
+EBS: Encrypted volumes.
+RDS: Encryption at creation.
+KMS manages keys.
+Enable encryption by default.
+Can't encrypt unencrypted resources in-place.` }
     ]
 };

@@ -158,20 +158,55 @@ Idempotency: prefer declarative modules over command/shell. Test with --check (d
         }
     ],
     questions: [
-        { question: 'What makes Ansible agentless?', answer: `Uses SSH (Linux) or WinRM (Windows) - no software installed on targets. Reduces maintenance, security footprint. Python required on targets for most modules.` },
-        { question: 'Explain idempotency in Ansible.', answer: `Running playbook multiple times produces same result. Tasks check current state before acting. Modules designed to be idempotent. Avoids unintended changes.` },
-        { question: 'What is the difference between a playbook and a role?', answer: `Playbook: YAML file with plays and tasks. Role: Reusable, organized collection of tasks, handlers, templates, vars. Roles promote reuse; playbooks orchestrate roles.` },
-        { question: 'How do you handle secrets in Ansible?', answer: `Ansible Vault encrypts files/vars. Store in separate vault file. Use vault password file in CI/CD. Can encrypt single values with encrypt_string.` },
-        { question: 'What are Ansible facts?', answer: `Auto-gathered host information (OS, IP, CPU, memory). Available as ansible_* variables. Disable with gather_facts: false. Custom facts in /etc/ansible/facts.d/.` },
-        { question: 'Explain handlers vs tasks.', answer: `Tasks run in order every execution. Handlers run once at end when notified. Perfect for service restarts. Deduplicated - only runs once per play.` },
-        { question: 'What is dynamic inventory?', answer: `Scripts or plugins generating inventory from external sources. Cloud plugins for AWS, GCP, Azure. Returns JSON. Keeps inventory in sync with cloud.` },
-        { question: 'How do you test Ansible playbooks?', answer: `--check: Dry run, shows changes. --diff: Shows file changes. Molecule: Full testing framework with Docker. Lint with ansible-lint.` },
-        { question: 'What is Ansible Galaxy?', answer: `Community hub for roles. Install with ansible-galaxy install. requirements.yml for dependencies. Can publish your own roles.` },
-        { question: 'Explain variable precedence.', answer: `22 levels, lowest to highest: defaults → inventory vars → playbook vars → role vars → block vars → task vars → extra vars (-e). Extra vars always win.` },
-        { question: 'What is the difference between include and import?', answer: `Import: Static, processed at parse time, cannot use loops. Include: Dynamic, processed at runtime, can loop. Import preferred unless dynamic needed.` },
+        { question: 'What makes Ansible agentless?', answer: `Uses SSH (Linux) or WinRM (Windows) - no software installed on targets.
+Reduces maintenance, security footprint.
+Python required on targets for most modules.` },
+        { question: 'Explain idempotency in Ansible.', answer: `Running playbook multiple times produces same result.
+Tasks check current state before acting.
+Modules designed to be idempotent.
+Avoids unintended changes.` },
+        { question: 'What is the difference between a playbook and a role?', answer: `Playbook: YAML file with plays and tasks.
+Role: Reusable, organized collection of tasks, handlers, templates, vars.
+Roles promote reuse; playbooks orchestrate roles.` },
+        { question: 'How do you handle secrets in Ansible?', answer: `Ansible Vault encrypts files/vars.
+Store in separate vault file.
+Use vault password file in CI/CD.
+Can encrypt single values with encrypt_string.` },
+        { question: 'What are Ansible facts?', answer: `Auto-gathered host information (OS, IP, CPU, memory).
+Available as ansible_* variables.
+Disable with gather_facts: false.
+Custom facts in /etc/ansible/facts.d/.` },
+        { question: 'Explain handlers vs tasks.', answer: `Tasks run in order every execution.
+Handlers run once at end when notified.
+Perfect for service restarts.
+Deduplicated - only runs once per play.` },
+        { question: 'What is dynamic inventory?', answer: `Scripts or plugins generating inventory from external sources.
+Cloud plugins for AWS, GCP, Azure.
+Returns JSON.
+Keeps inventory in sync with cloud.` },
+        { question: 'How do you test Ansible playbooks?', answer: `--check: Dry run, shows changes. --diff: Shows file changes.
+Molecule: Full testing framework with Docker.
+Lint with ansible-lint.` },
+        { question: 'What is Ansible Galaxy?', answer: `Community hub for roles.
+Install with ansible-galaxy install. requirements.yml for dependencies.
+Can publish your own roles.` },
+        { question: 'Explain variable precedence.', answer: `22 levels, lowest to highest: defaults → inventory vars → playbook vars → role vars → block vars → task vars → extra vars (-e).
+Extra vars always win.` },
+        { question: 'What is the difference between include and import?', answer: `Import: Static, processed at parse time, cannot use loops.
+Include: Dynamic, processed at runtime, can loop.
+Import preferred unless dynamic needed.` },
         { question: 'How do you run tasks on specific hosts?', answer: `when: condition with ansible_hostname or groups. delegate_to for running on different host. run_once for single execution regardless of hosts.` },
-        { question: 'What is Ansible Tower/AWX?', answer: `GUI and REST API for Ansible. RBAC, job scheduling, inventory management. Tower is paid; AWX is open-source upstream. Great for enterprise teams.` },
-        { question: 'How do you optimize Ansible performance?', answer: `Pipelining in ansible.cfg. SSH multiplexing. Async for long tasks. serial for rolling deployments. Mitogen plugin for faster execution.` },
-        { question: 'What are callback plugins?', answer: `Custom output handling. Change how results display. Built-in: json, yaml, minimal. Can send to external systems (Slack, logging).` }
+        { question: 'What is Ansible Tower/AWX?', answer: `GUI and REST API for Ansible.
+RBAC, job scheduling, inventory management.
+Tower is paid; AWX is open-source upstream.
+Great for enterprise teams.` },
+        { question: 'How do you optimize Ansible performance?', answer: `Pipelining in ansible.cfg.
+SSH multiplexing.
+Async for long tasks. serial for rolling deployments.
+Mitogen plugin for faster execution.` },
+        { question: 'What are callback plugins?', answer: `Custom output handling.
+Change how results display.
+Built-in: json, yaml, minimal.
+Can send to external systems (Slack, logging).` }
     ]
 };

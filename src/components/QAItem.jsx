@@ -21,7 +21,7 @@ function QAItem({ question, answer, number }) {
             <div className="qa-answer">
                 <div className="qa-answer-content">
                     {answer.split('\n\n').map((paragraph, index) => (
-                        <p key={index}>{paragraph}</p>
+                        <p key={index} style={{ whiteSpace: 'pre-line' }}>{paragraph}</p>
                     ))}
                 </div>
             </div>

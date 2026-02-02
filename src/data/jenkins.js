@@ -202,20 +202,74 @@ credentials:
         }
     ],
     questions: [
-        { question: 'What is the difference between Declarative and Scripted Pipeline?', answer: `Declarative: Structured, opinionated, validates syntax, easier. Scripted: Full Groovy, flexible, complex, no validation. Use declarative unless you need scripted's power.` },
-        { question: 'How do you handle credentials in Jenkins?', answer: `Credentials plugin stores securely. withCredentials binds to variables. Types: Username/password, SSH, Secret text. Masked in logs. Scope: Global, Folder, System.` },
-        { question: 'What are Shared Libraries?', answer: `Reusable Groovy code for pipelines. Global or per-folder. vars/ for custom steps, src/ for classes. @Library annotation to load. Promotes standardization and DRY.` },
-        { question: 'Explain Jenkins agents and executors.', answer: `Agents (slaves): Machines running builds. Executors: Build slots on agent. Labels route jobs. Cloud plugins auto-scale. Controller should not run builds in production.` },
-        { question: 'What is Multibranch Pipeline?', answer: `Auto-discovers branches with Jenkinsfile. Creates job per branch. PR builds. Orphan cleanup. Organization folder scans entire org. Enables GitFlow and PR workflows.` },
-        { question: 'How do you implement parallel stages?', answer: `parallel block in Declarative or map in Scripted. Runs stages/steps concurrently. failFast stops all on failure. Great for matrix testing or independent tasks.` },
-        { question: 'What is Configuration as Code (JCasC)?', answer: `YAML-defined Jenkins config. Version controlled. Reproducible setup. System settings, credentials, jobs. Reload without restart. Essential for Jenkins at scale.` },
-        { question: 'How do you trigger builds?', answer: `Poll SCM: Regular checks. Webhooks: Push-based (preferred). Upstream: After another job. Timer (cron). Remote API. pollSCM, cron, upstream triggers.` },
-        { question: 'Explain post actions in pipelines.', answer: `Run after stages complete. Conditions: always, success, failure, unstable, changed, aborted. Use for notifications, cleanup, publishing. Defined in post block.` },
-        { question: 'What is Blue Ocean?', answer: `Modern Jenkins UI. Visual pipeline editor. Better visualization of pipelines. GitHub/GitLab integration. Easier for new users. Plugin installation.` },
-        { question: 'How do you manage Jenkins at scale?', answer: `Controller/agent architecture. Cloud agents (Kubernetes, EC2). JCasC for configuration. Shared Libraries for standardization. Folder organization. Regular maintenance.` },
-        { question: 'What are environment variables in Jenkins?', answer: `Built-in: BUILD_NUMBER, JOB_NAME, WORKSPACE. Custom via environment block. withEnv for step scope. Credentials bound as variables. Available in shell scripts.` },
-        { question: 'How do you implement approval gates?', answer: `input step pauses for approval. timeout for expiration. submitter limits who can approve. Parameters for input choices. Essential for production deployments.` },
-        { question: 'Explain stash and unstash.', answer: `stash: Save files from workspace. unstash: Restore in same or different agent. Share files between stages on different agents. Lightweight alternative to artifacts.` },
-        { question: 'What are Jenkins security best practices?', answer: `Enable security. RBAC with Matrix Auth. Disable CLI remoting. Agent-to-controller security. Regular updates. Audit trail. Credentials encryption. CSRF protection.` }
+        { question: 'What is the difference between Declarative and Scripted Pipeline?', answer: `Declarative: Structured, opinionated, validates syntax, easier.
+Scripted: Full Groovy, flexible, complex, no validation.
+Use declarative unless you need scripted's power.` },
+        { question: 'How do you handle credentials in Jenkins?', answer: `Credentials plugin stores securely. withCredentials binds to variables.
+Types: Username/password, SSH, Secret text.
+Masked in logs.
+Scope: Global, Folder, System.` },
+        { question: 'What are Shared Libraries?', answer: `Reusable Groovy code for pipelines.
+Global or per-folder. vars/ for custom steps, src/ for classes. @Library annotation to load.
+Promotes standardization and DRY.` },
+        { question: 'Explain Jenkins agents and executors.', answer: `Agents (slaves): Machines running builds.
+Executors: Build slots on agent.
+Labels route jobs.
+Cloud plugins auto-scale.
+Controller should not run builds in production.` },
+        { question: 'What is Multibranch Pipeline?', answer: `Auto-discovers branches with Jenkinsfile.
+Creates job per branch.
+PR builds.
+Orphan cleanup.
+Organization folder scans entire org.
+Enables GitFlow and PR workflows.` },
+        { question: 'How do you implement parallel stages?', answer: `parallel block in Declarative or map in Scripted.
+Runs stages/steps concurrently. failFast stops all on failure.
+Great for matrix testing or independent tasks.` },
+        { question: 'What is Configuration as Code (JCasC)?', answer: `YAML-defined Jenkins config.
+Version controlled.
+Reproducible setup.
+System settings, credentials, jobs.
+Reload without restart.
+Essential for Jenkins at scale.` },
+        { question: 'How do you trigger builds?', answer: `Poll SCM: Regular checks.
+Webhooks: Push-based (preferred).
+Upstream: After another job.
+Timer (cron).
+Remote API. pollSCM, cron, upstream triggers.` },
+        { question: 'Explain post actions in pipelines.', answer: `Run after stages complete.
+Conditions: always, success, failure, unstable, changed, aborted.
+Use for notifications, cleanup, publishing.
+Defined in post block.` },
+        { question: 'What is Blue Ocean?', answer: `Modern Jenkins UI.
+Visual pipeline editor.
+Better visualization of pipelines.
+GitHub/GitLab integration.
+Easier for new users.
+Plugin installation.` },
+        { question: 'How do you manage Jenkins at scale?', answer: `Controller/agent architecture.
+Cloud agents (Kubernetes, EC2).
+JCasC for configuration.
+Shared Libraries for standardization.
+Folder organization.
+Regular maintenance.` },
+        { question: 'What are environment variables in Jenkins?', answer: `Built-in: BUILD_NUMBER, JOB_NAME, WORKSPACE.
+Custom via environment block. withEnv for step scope.
+Credentials bound as variables.
+Available in shell scripts.` },
+        { question: 'How do you implement approval gates?', answer: `input step pauses for approval. timeout for expiration. submitter limits who can approve.
+Parameters for input choices.
+Essential for production deployments.` },
+        { question: 'Explain stash and unstash.', answer: `stash: Save files from workspace. unstash: Restore in same or different agent.
+Share files between stages on different agents.
+Lightweight alternative to artifacts.` },
+        { question: 'What are Jenkins security best practices?', answer: `Enable security.
+RBAC with Matrix Auth.
+Disable CLI remoting.
+Agent-to-controller security.
+Regular updates.
+Audit trail.
+Credentials encryption.
+CSRF protection.` }
     ]
 };

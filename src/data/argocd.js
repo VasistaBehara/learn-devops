@@ -221,21 +221,58 @@ g, admin-team, role:admin
         }
     ],
     questions: [
-        { question: 'What is ArgoCD and how does it implement GitOps?', answer: 'ArgoCD is a declarative GitOps CD tool for Kubernetes. It continuously monitors Git repos and syncs cluster state to match. Git becomes the source of truth; all changes go through Git commits, providing audit trails and easy rollbacks.' },
-        { question: 'What is the difference between ArgoCD and Flux?', answer: 'Both implement GitOps. ArgoCD has a rich UI, app-of-apps pattern, and ApplicationSets. Flux is more lightweight, uses native K8s resources, and integrates with Helm/Kustomize via controllers. ArgoCD is often preferred for its UI.' },
-        { question: 'How does ArgoCD sync work?', answer: 'ArgoCD compares desired state (Git) with live state (cluster). If OutOfSync, it can sync manually or automatically. Sync applies manifests in waves, respecting hooks. Self-heal reverts drift; prune removes orphaned resources.' },
-        { question: 'What are sync waves and hooks?', answer: 'Waves order resource creation (lower numbers first). Hooks run at phases: PreSync (before apply), Sync (with apply), PostSync (after apply), SyncFail (on failure). Use for migrations, notifications, validation.' },
-        { question: 'How do you implement app-of-apps pattern?', answer: 'Create a parent Application that points to a directory containing child Application manifests. When parent syncs, it creates/updates child apps. Useful for managing multiple applications together with hierarchical structure.' },
-        { question: 'What are ApplicationSets and when to use them?', answer: 'ApplicationSets generate multiple Applications from a template. Generators: list (static), clusters (all/matching), git (directories/files), matrix, merge. Use for: multi-cluster, multi-environment, or many similar apps.' },
-        { question: 'How does ArgoCD handle secrets?', answer: 'ArgoCD doesn\'t handle secrets specially by default. Options: Sealed Secrets, External Secrets Operator, SOPS, HashiCorp Vault with ArgoCD Vault Plugin. Never commit plain secrets to Git.' },
-        { question: 'How do you configure RBAC in ArgoCD?', answer: 'Define policies in argocd-rbac-cm ConfigMap. Format: p, role, resource, action, object, effect. Assign users/groups to roles with g entries. Supports wildcards, SSO group mapping, and default roles.' },
-        { question: 'What is self-heal in ArgoCD?', answer: 'Self-heal automatically reverts manual changes made directly to cluster (drift). If someone runs kubectl edit, ArgoCD detects the difference and syncs back to Git state. Essential for maintaining GitOps discipline.' },
-        { question: 'How do you roll back in ArgoCD?', answer: 'ArgoCD tracks deployment history. Use UI or CLI: argocd app rollback <app> <revision>. Or git revert the commit and let ArgoCD sync. History shows all synced revisions with timestamps.' },
-        { question: 'How do you integrate ArgoCD with Helm?', answer: 'ArgoCD natively supports Helm charts. Specify chart details in source: repoURL, chart name, targetRevision. Override values via source.helm.values or source.helm.valuesFiles.' },
-        { question: 'How do you handle multiple environments?', answer: 'Options: separate directories per env, Kustomize overlays, Helm values files per env, ApplicationSets with generators. Keep base config shared, environment-specific values separate. Branch strategy less recommended.' },
-        { question: 'What is the diffing strategy in ArgoCD?', answer: 'ArgoCD compares desired vs live state. Can ignore specific fields (managedFieldsManagers, status). Custom diffing for CRDs. Diffing is normalized to handle server-side defaults and field managers.' },
-        { question: 'How do you troubleshoot sync failures?', answer: 'Check: app status in UI, sync operation details, events, and logs. Common issues: RBAC, resource validation, hook failures, dependency ordering. Use argocd app diff to see differences.' },
-        { question: 'How do you set up disaster recovery for ArgoCD?', answer: 'ArgoCD stores state in K8s (etcd). Backup: argocd admin export. Use HA setup with multiple replicas. Store Application manifests in Git (app-of-apps). Can rebuild from Git repos if needed.' }
+        { question: 'What is ArgoCD and how does it implement GitOps?', answer: `ArgoCD is a declarative GitOps CD tool for Kubernetes.
+It continuously monitors Git repos and syncs cluster state to match.
+Git becomes the source of truth; all changes go through Git commits, providing audit trails and easy rollbacks.` },
+        { question: 'What is the difference between ArgoCD and Flux?', answer: `Both implement GitOps.
+ArgoCD has a rich UI, app-of-apps pattern, and ApplicationSets.
+Flux is more lightweight, uses native K8s resources, and integrates with Helm/Kustomize via controllers.
+ArgoCD is often preferred for its UI.` },
+        { question: 'How does ArgoCD sync work?', answer: `ArgoCD compares desired state (Git) with live state (cluster).
+If OutOfSync, it can sync manually or automatically.
+Sync applies manifests in waves, respecting hooks.
+Self-heal reverts drift; prune removes orphaned resources.` },
+        { question: 'What are sync waves and hooks?', answer: `Waves order resource creation (lower numbers first).
+Hooks run at phases: PreSync (before apply), Sync (with apply), PostSync (after apply), SyncFail (on failure).
+Use for migrations, notifications, validation.` },
+        { question: 'How do you implement app-of-apps pattern?', answer: `Create a parent Application that points to a directory containing child Application manifests.
+When parent syncs, it creates/updates child apps.
+Useful for managing multiple applications together with hierarchical structure.` },
+        { question: 'What are ApplicationSets and when to use them?', answer: `ApplicationSets generate multiple Applications from a template.
+Generators: list (static), clusters (all/matching), git (directories/files), matrix, merge.
+Use for: multi-cluster, multi-environment, or many similar apps.` },
+        { question: 'How does ArgoCD handle secrets?', answer: `ArgoCD doesn't handle secrets specially by default.
+Options: Sealed Secrets, External Secrets Operator, SOPS, HashiCorp Vault with ArgoCD Vault Plugin.
+Never commit plain secrets to Git.` },
+        { question: 'How do you configure RBAC in ArgoCD?', answer: `Define policies in argocd-rbac-cm ConfigMap.
+Format: p, role, resource, action, object, effect.
+Assign users/groups to roles with g entries.
+Supports wildcards, SSO group mapping, and default roles.` },
+        { question: 'What is self-heal in ArgoCD?', answer: `Self-heal automatically reverts manual changes made directly to cluster (drift).
+If someone runs kubectl edit, ArgoCD detects the difference and syncs back to Git state.
+Essential for maintaining GitOps discipline.` },
+        { question: 'How do you roll back in ArgoCD?', answer: `ArgoCD tracks deployment history.
+Use UI or CLI: argocd app rollback <app> <revision>.
+Or git revert the commit and let ArgoCD sync.
+History shows all synced revisions with timestamps.` },
+        { question: 'How do you integrate ArgoCD with Helm?', answer: `ArgoCD natively supports Helm charts.
+Specify chart details in source: repoURL, chart name, targetRevision.
+Override values via source.helm.values or source.helm.valuesFiles.` },
+        { question: 'How do you handle multiple environments?', answer: `Options: separate directories per env, Kustomize overlays, Helm values files per env, ApplicationSets with generators.
+Keep base config shared, environment-specific values separate.
+Branch strategy less recommended.` },
+        { question: 'What is the diffing strategy in ArgoCD?', answer: `ArgoCD compares desired vs live state.
+Can ignore specific fields (managedFieldsManagers, status).
+Custom diffing for CRDs.
+Diffing is normalized to handle server-side defaults and field managers.` },
+        { question: 'How do you troubleshoot sync failures?', answer: `Check: app status in UI, sync operation details, events, and logs.
+Common issues: RBAC, resource validation, hook failures, dependency ordering.
+Use argocd app diff to see differences.` },
+        { question: 'How do you set up disaster recovery for ArgoCD?', answer: `ArgoCD stores state in K8s (etcd).
+Backup: argocd admin export.
+Use HA setup with multiple replicas.
+Store Application manifests in Git (app-of-apps).
+Can rebuild from Git repos if needed.` }
     ]
 };
 

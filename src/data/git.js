@@ -126,20 +126,62 @@ git push --tags           # Push all tags` }
         }
     ],
     questions: [
-        { question: 'What is the difference between merge and rebase?', answer: `Merge: Combines branches with merge commit, preserves history. Rebase: Replays commits on new base, linear history. Use merge for shared branches, rebase for local cleanup.` },
-        { question: 'Explain git reset vs git revert.', answer: `Reset: Moves HEAD, rewrites history, dangerous for shared commits. Revert: Creates new commit undoing changes, safe for shared history. Use revert for pushed commits.` },
-        { question: 'What is a detached HEAD?', answer: `HEAD points to commit instead of branch. Changes won't be on any branch. Create branch to save work: git checkout -b new-branch. Common when checking out tags/commits.` },
-        { question: 'How do you resolve merge conflicts?', answer: `Git marks conflicts in files. Edit to keep desired changes. Remove conflict markers. Stage (git add) resolved files. Complete with git commit. Use mergetool for GUI.` },
-        { question: 'What is git stash used for?', answer: `Temporarily saves uncommitted changes. Allows switching branches without losing work. Stack-based (LIFO). Pop to restore. Useful for context switching.` },
-        { question: 'Explain the three-tree architecture.', answer: `Working Directory: Actual files. Staging Area (Index): Next commit snapshot. Repository: Committed history. git add moves to staging, git commit to repository.` },
-        { question: 'What is git cherry-pick?', answer: `Applies specific commit to current branch. Creates new commit. Useful for hotfixes, backports. Doesn't move branches, just copies changes.` },
-        { question: 'How does git bisect work?', answer: `Binary search for bug introduction. Mark good/bad commits. Git checks out middle. Repeat until finding first bad commit. Automate with git bisect run <script>.` },
-        { question: 'What is the difference between fetch and pull?', answer: `Fetch: Downloads from remote, doesn't merge. Pull: Fetch + merge (or rebase with --rebase). Fetch is safer, allows review before merging.` },
-        { question: 'Explain GitFlow branching strategy.', answer: `main: Production releases. develop: Integration branch. feature/*: New features from develop. release/*: Release preparation. hotfix/*: Production fixes. Formal but complex.` },
-        { question: 'What is git reflog?', answer: `Records all HEAD movements. Recovery tool for "lost" commits. Shows reset, rebase, checkout history. Commits reachable for ~30 days. git reflog + git reset for recovery.` },
-        { question: 'How do you squash commits?', answer: `Interactive rebase: git rebase -i HEAD~n. Change pick to squash (s) on commits to combine. Edit combined message. Creates cleaner history.` },
-        { question: 'What are Git submodules?', answer: `Repositories inside repositories. Track specific commits. Use for shared libraries. git submodule add/update. Alternative: Git subtree or package managers.` },
-        { question: 'How do you undo a pushed commit?', answer: `git revert: Safe, creates new commit. Force push (dangerous): git reset + git push -f. Revert preserves history, force rewrite causes issues for others.` },
-        { question: 'What is git blame?', answer: `Shows who last modified each line. Git blame <file>. -L for line range. Useful for understanding code history, finding who to ask. Watch for reformatting commits.` }
+        { question: 'What is the difference between merge and rebase?', answer: `Merge: Combines branches with merge commit, preserves history.
+Rebase: Replays commits on new base, linear history.
+Use merge for shared branches, rebase for local cleanup.` },
+        { question: 'Explain git reset vs git revert.', answer: `Reset: Moves HEAD, rewrites history, dangerous for shared commits.
+Revert: Creates new commit undoing changes, safe for shared history.
+Use revert for pushed commits.` },
+        { question: 'What is a detached HEAD?', answer: `HEAD points to commit instead of branch.
+Changes won't be on any branch.
+Create branch to save work: git checkout -b new-branch.
+Common when checking out tags/commits.` },
+        { question: 'How do you resolve merge conflicts?', answer: `Git marks conflicts in files.
+Edit to keep desired changes.
+Remove conflict markers.
+Stage (git add) resolved files.
+Complete with git commit.
+Use mergetool for GUI.` },
+        { question: 'What is git stash used for?', answer: `Temporarily saves uncommitted changes.
+Allows switching branches without losing work.
+Stack-based (LIFO).
+Pop to restore.
+Useful for context switching.` },
+        { question: 'Explain the three-tree architecture.', answer: `Working Directory: Actual files.
+Staging Area (Index): Next commit snapshot.
+Repository: Committed history. git add moves to staging, git commit to repository.` },
+        { question: 'What is git cherry-pick?', answer: `Applies specific commit to current branch.
+Creates new commit.
+Useful for hotfixes, backports.
+Doesn't move branches, just copies changes.` },
+        { question: 'How does git bisect work?', answer: `Binary search for bug introduction.
+Mark good/bad commits.
+Git checks out middle.
+Repeat until finding first bad commit.
+Automate with git bisect run <script>.` },
+        { question: 'What is the difference between fetch and pull?', answer: `Fetch: Downloads from remote, doesn't merge.
+Pull: Fetch + merge (or rebase with --rebase).
+Fetch is safer, allows review before merging.` },
+        { question: 'Explain GitFlow branching strategy.', answer: `main: Production releases. develop: Integration branch. feature/*: New features from develop. release/*: Release preparation. hotfix/*: Production fixes.
+Formal but complex.` },
+        { question: 'What is git reflog?', answer: `Records all HEAD movements.
+Recovery tool for "lost" commits.
+Shows reset, rebase, checkout history.
+Commits reachable for ~30 days. git reflog + git reset for recovery.` },
+        { question: 'How do you squash commits?', answer: `Interactive rebase: git rebase -i HEAD~n.
+Change pick to squash (s) on commits to combine.
+Edit combined message.
+Creates cleaner history.` },
+        { question: 'What are Git submodules?', answer: `Repositories inside repositories.
+Track specific commits.
+Use for shared libraries. git submodule add/update.
+Alternative: Git subtree or package managers.` },
+        { question: 'How do you undo a pushed commit?', answer: `git revert: Safe, creates new commit.
+Force push (dangerous): git reset + git push -f.
+Revert preserves history, force rewrite causes issues for others.` },
+        { question: 'What is git blame?', answer: `Shows who last modified each line.
+Git blame <file>. -L for line range.
+Useful for understanding code history, finding who to ask.
+Watch for reformatting commits.` }
     ]
 };

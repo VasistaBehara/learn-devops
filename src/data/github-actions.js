@@ -187,20 +187,73 @@ Use for: Private networks, special hardware, cost savings, compliance. Require s
     }
   ],
   questions: [
-    { question: 'How do you trigger a workflow manually?', answer: `Use workflow_dispatch event. Optionally define inputs. Trigger from Actions tab or API. Good for deployments or on-demand tasks. Can combine with other triggers.` },
+    { question: 'How do you trigger a workflow manually?', answer: `Use workflow_dispatch event.
+Optionally define inputs.
+Trigger from Actions tab or API.
+Good for deployments or on-demand tasks.
+Can combine with other triggers.` },
     { question: 'Explain the difference between needs and uses.', answer: `needs: Job dependency, waits for job to complete. uses: Reference an action within a step. needs is job-level (sequential), uses is step-level (reusable actions).` },
-    { question: 'How do you share data between jobs?', answer: `Artifacts: files via upload/download-artifact. Outputs: Set output in job, reference in dependent job. Artifacts for files, outputs for small values.` },
-    { question: 'What is GITHUB_TOKEN?', answer: `Auto-generated token for workflow. Scoped to repo. Permissions configurable per workflow. Expires when job ends. Use for API calls, pushing code. More secure than PATs.` },
-    { question: 'How do matrix builds work?', answer: `Define combinations of variables. GitHub creates job for each. Parallel by default. fail-fast to stop on first failure. include/exclude for specific combos. Max 256 jobs.` },
-    { question: 'What are reusable workflows?', answer: `Workflows that can be called from other workflows. workflow_call trigger. Pass inputs and secrets. Centralize common patterns. Version with refs. Reduce duplication.` },
-    { question: 'How do you debug failing workflows?', answer: `Check job logs. Enable debug logging: ACTIONS_RUNNER_DEBUG=true. Use tmate for SSH access. Add debugging steps. Download artifacts. Test locally with act.` },
-    { question: 'Explain environment protection rules.', answer: `Required reviewers: Approval before deployment. Wait timer: Delay deployment. Branch restrictions: Only specific branches. Prevent secrets exposure. Essential for production.` },
-    { question: 'What is the difference between cache and artifacts?', answer: `Cache: Speed up workflows, key-based, shared across runs, best-effort. Artifacts: Share between jobs, persist after run, guaranteed. Cache for dependencies, artifacts for outputs.` },
-    { question: 'How do you handle secrets?', answer: `Repo/org/environment secrets. Encrypted at rest. Not in logs (masked). Reference with secrets context. Environment secrets for deployment. Never commit secrets.` },
-    { question: 'What are composite actions?', answer: `Reusable steps packaged as action. Defined in action.yml. Can use other actions. Simpler than JavaScript actions. Good for common step sequences.` },
-    { question: 'How do concurrency controls work?', answer: `concurrency key groups workflows. Cancel in-progress when new starts. Use for deployments - only one at a time. group name can include branch/PR number.` },
-    { question: 'Explain workflow permissions.', answer: `GITHUB_TOKEN permissions. Default: Read repo. Configure per workflow or job. Least privilege principle. Write for pushes, packages, deployments. Security best practice.` },
-    { question: 'What is workflow_run event?', answer: `Trigger when another workflow completes. Access artifacts from triggering workflow. Chain workflows. Useful for deployment after tests or notifications.` },
-    { question: 'How do self-hosted runners differ?', answer: `Run on your infrastructure. Full control over environment. Access private networks. Custom hardware (GPU). Persistent state between jobs. Require security hardening.` }
+    { question: 'How do you share data between jobs?', answer: `Artifacts: files via upload/download-artifact.
+Outputs: Set output in job, reference in dependent job.
+Artifacts for files, outputs for small values.` },
+    { question: 'What is GITHUB_TOKEN?', answer: `Auto-generated token for workflow.
+Scoped to repo.
+Permissions configurable per workflow.
+Expires when job ends.
+Use for API calls, pushing code.
+More secure than PATs.` },
+    { question: 'How do matrix builds work?', answer: `Define combinations of variables.
+GitHub creates job for each.
+Parallel by default. fail-fast to stop on first failure. include/exclude for specific combos.
+Max 256 jobs.` },
+    { question: 'What are reusable workflows?', answer: `Workflows that can be called from other workflows. workflow_call trigger.
+Pass inputs and secrets.
+Centralize common patterns.
+Version with refs.
+Reduce duplication.` },
+    { question: 'How do you debug failing workflows?', answer: `Check job logs.
+Enable debug logging: ACTIONS_RUNNER_DEBUG=true.
+Use tmate for SSH access.
+Add debugging steps.
+Download artifacts.
+Test locally with act.` },
+    { question: 'Explain environment protection rules.', answer: `Required reviewers: Approval before deployment.
+Wait timer: Delay deployment.
+Branch restrictions: Only specific branches.
+Prevent secrets exposure.
+Essential for production.` },
+    { question: 'What is the difference between cache and artifacts?', answer: `Cache: Speed up workflows, key-based, shared across runs, best-effort.
+Artifacts: Share between jobs, persist after run, guaranteed.
+Cache for dependencies, artifacts for outputs.` },
+    { question: 'How do you handle secrets?', answer: `Repo/org/environment secrets.
+Encrypted at rest.
+Not in logs (masked).
+Reference with secrets context.
+Environment secrets for deployment.
+Never commit secrets.` },
+    { question: 'What are composite actions?', answer: `Reusable steps packaged as action.
+Defined in action.yml.
+Can use other actions.
+Simpler than JavaScript actions.
+Good for common step sequences.` },
+    { question: 'How do concurrency controls work?', answer: `concurrency key groups workflows.
+Cancel in-progress when new starts.
+Use for deployments - only one at a time. group name can include branch/PR number.` },
+    { question: 'Explain workflow permissions.', answer: `GITHUB_TOKEN permissions.
+Default: Read repo.
+Configure per workflow or job.
+Least privilege principle.
+Write for pushes, packages, deployments.
+Security best practice.` },
+    { question: 'What is workflow_run event?', answer: `Trigger when another workflow completes.
+Access artifacts from triggering workflow.
+Chain workflows.
+Useful for deployment after tests or notifications.` },
+    { question: 'How do self-hosted runners differ?', answer: `Run on your infrastructure.
+Full control over environment.
+Access private networks.
+Custom hardware (GPU).
+Persistent state between jobs.
+Require security hardening.` }
   ]
 };

@@ -152,20 +152,61 @@ gcloud logging read "severity>=ERROR" --limit=10` }
         }
     ],
     questions: [
-        { question: 'What is the difference between Compute Engine and App Engine?', answer: `Compute Engine (IaaS): Full VM control. App Engine (PaaS): Managed, focus on code. Standard (sandboxed, fast scale) or Flexible (Docker). Use App Engine for web apps, Compute for custom needs.` },
-        { question: 'Explain GCP resource hierarchy.', answer: `Organization → Folders → Projects → Resources. IAM policies inherit downward. More permissive policies at higher levels grant broader access. Projects are billing and resource boundary.` },
-        { question: 'What is Workload Identity?', answer: `GKE pods impersonate IAM service accounts without keys. Map Kubernetes SA to IAM SA. No credentials to manage. Better security and audit trail than SA keys.` },
-        { question: 'How does Cloud Spanner differ from Cloud SQL?', answer: `Cloud SQL: Regional, vertical scaling, MySQL/PostgreSQL/SQL Server. Spanner: Global, horizontal scaling, strong consistency, 99.999% SLA. Spanner for global scale, SQL for traditional workloads.` },
-        { question: 'What load balancing options exist?', answer: `External: HTTP(S) (L7 global), TCP/SSL Proxy (L4 global), Network (L4 regional). Internal: HTTP(S), TCP/UDP. Premium tier uses Google backbone. Standard is internet-based.` },
-        { question: 'When to use Cloud Run vs GKE?', answer: `Cloud Run: Stateless services, variable traffic, scale to zero, simple deployment. GKE: Kubernetes ecosystem, stateful apps, complex networking, multi-container pods.` },
-        { question: 'What is Cloud Dataflow?', answer: `Managed Apache Beam for batch and streaming. Auto-scaling, exactly-once processing. Use for ETL, real-time analytics, data migration. Alternative to Dataproc (Spark/Hadoop).` },
-        { question: 'How do you implement DR in GCP?', answer: `Multi-region services (Spanner, GCS), regional MIGs, global load balancing. Cold (backup restore), Warm (reduced standby), Hot (active-active). Cloud DNS for failover.` },
-        { question: 'What is VPC Service Controls?', answer: `Security perimeter preventing data exfiltration. Define perimeter around projects, control API access. Block unauthorized data transfer. Essential for compliance.` },
-        { question: 'Explain Cloud Armor.', answer: `DDoS protection and WAF. Pre-configured rules (OWASP), custom rules, rate limiting. Adaptive Protection with ML. Protects HTTP(S) Load Balancer backends.` },
-        { question: 'How do you monitor applications?', answer: `Cloud Monitoring: Metrics, dashboards, alerting. Cloud Logging: Log Explorer, queries, sinks. Cloud Trace: Distributed tracing. Profiler: CPU/memory profiling.` },
-        { question: 'What is Cloud CDN?', answer: `Content delivery at Google edge. Integrates with HTTP(S) LB. Cache modes: Use origin headers, cache all static, force cache all. Signed URLs for access control.` },
-        { question: 'How are Labels used?', answer: `Key-value metadata for organization and billing. Up to 64 per resource. Use for cost allocation, filtering, automation. Different from network tags (firewall targeting).` },
-        { question: 'What are Managed Instance Groups?', answer: `Collection of identical VMs from template. Autoscaling, health checks, rolling updates. Zonal or regional (multi-zone). Use for stateless web servers.` },
-        { question: 'How does GCP handle encryption?', answer: `At rest: Default encryption (AES-256). CMEK (Cloud KMS managed), CSEK (customer-supplied). In transit: TLS 1.3. Cloud HSM for hardware key storage.` }
+        { question: 'What is the difference between Compute Engine and App Engine?', answer: `Compute Engine (IaaS): Full VM control.
+App Engine (PaaS): Managed, focus on code.
+Standard (sandboxed, fast scale) or Flexible (Docker).
+Use App Engine for web apps, Compute for custom needs.` },
+        { question: 'Explain GCP resource hierarchy.', answer: `Organization → Folders → Projects → Resources.
+IAM policies inherit downward.
+More permissive policies at higher levels grant broader access.
+Projects are billing and resource boundary.` },
+        { question: 'What is Workload Identity?', answer: `GKE pods impersonate IAM service accounts without keys.
+Map Kubernetes SA to IAM SA.
+No credentials to manage.
+Better security and audit trail than SA keys.` },
+        { question: 'How does Cloud Spanner differ from Cloud SQL?', answer: `Cloud SQL: Regional, vertical scaling, MySQL/PostgreSQL/SQL Server.
+Spanner: Global, horizontal scaling, strong consistency, 99.999% SLA.
+Spanner for global scale, SQL for traditional workloads.` },
+        { question: 'What load balancing options exist?', answer: `External: HTTP(S) (L7 global), TCP/SSL Proxy (L4 global), Network (L4 regional).
+Internal: HTTP(S), TCP/UDP.
+Premium tier uses Google backbone.
+Standard is internet-based.` },
+        { question: 'When to use Cloud Run vs GKE?', answer: `Cloud Run: Stateless services, variable traffic, scale to zero, simple deployment.
+GKE: Kubernetes ecosystem, stateful apps, complex networking, multi-container pods.` },
+        { question: 'What is Cloud Dataflow?', answer: `Managed Apache Beam for batch and streaming.
+Auto-scaling, exactly-once processing.
+Use for ETL, real-time analytics, data migration.
+Alternative to Dataproc (Spark/Hadoop).` },
+        { question: 'How do you implement DR in GCP?', answer: `Multi-region services (Spanner, GCS), regional MIGs, global load balancing.
+Cold (backup restore), Warm (reduced standby), Hot (active-active).
+Cloud DNS for failover.` },
+        { question: 'What is VPC Service Controls?', answer: `Security perimeter preventing data exfiltration.
+Define perimeter around projects, control API access.
+Block unauthorized data transfer.
+Essential for compliance.` },
+        { question: 'Explain Cloud Armor.', answer: `DDoS protection and WAF.
+Pre-configured rules (OWASP), custom rules, rate limiting.
+Adaptive Protection with ML.
+Protects HTTP(S) Load Balancer backends.` },
+        { question: 'How do you monitor applications?', answer: `Cloud Monitoring: Metrics, dashboards, alerting.
+Cloud Logging: Log Explorer, queries, sinks.
+Cloud Trace: Distributed tracing.
+Profiler: CPU/memory profiling.` },
+        { question: 'What is Cloud CDN?', answer: `Content delivery at Google edge.
+Integrates with HTTP(S) LB.
+Cache modes: Use origin headers, cache all static, force cache all.
+Signed URLs for access control.` },
+        { question: 'How are Labels used?', answer: `Key-value metadata for organization and billing.
+Up to 64 per resource.
+Use for cost allocation, filtering, automation.
+Different from network tags (firewall targeting).` },
+        { question: 'What are Managed Instance Groups?', answer: `Collection of identical VMs from template.
+Autoscaling, health checks, rolling updates.
+Zonal or regional (multi-zone).
+Use for stateless web servers.` },
+        { question: 'How does GCP handle encryption?', answer: `At rest: Default encryption (AES-256).
+CMEK (Cloud KMS managed), CSEK (customer-supplied).
+In transit: TLS 1.3.
+Cloud HSM for hardware key storage.` }
     ]
 };

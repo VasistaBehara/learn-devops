@@ -341,21 +341,58 @@ json.dumps({'date': datetime.now()}, cls=CustomEncoder)`
         }
     ],
     questions: [
-        { question: 'What is JSON and what is it used for?', answer: 'JSON (JavaScript Object Notation) is a lightweight text format for data exchange. Used in APIs, configuration files, and data storage. Language-independent, human-readable, widely supported.' },
-        { question: 'What are the valid JSON data types?', answer: 'Six types: string (double-quoted), number (integer or float), boolean (true/false), null, object (key-value pairs in {}), and array (ordered list in []). No undefined, Date, or functions.' },
-        { question: 'Why must JSON keys be quoted?', answer: 'JSON spec requires double quotes around all keys for unambiguous parsing. Unlike JavaScript objects which allow unquoted keys, JSON is strict for interoperability across languages.' },
-        { question: 'Can JSON have comments?', answer: 'No. Standard JSON does not support comments. Workarounds: use _comment keys, JSONC format (VS Code), or JSON5 extension. When converting from YAML, comments are stripped.' },
-        { question: 'What is the difference between JSON and YAML?', answer: 'JSON: stricter syntax, no comments, more portable. YAML: human-readable, supports comments, anchors, multi-line strings. YAML is superset of JSON. JSON better for APIs; YAML for config files.' },
-        { question: 'How do you handle dates in JSON?', answer: 'JSON has no date type. Use ISO 8601 string format: "2024-01-15T10:30:00Z". Parse to Date object in application code. Some APIs use Unix timestamps (seconds since epoch).' },
-        { question: 'What is JSON Schema?', answer: 'JSON Schema defines structure and validation rules for JSON documents. Specifies types, required fields, formats, ranges. Used for API documentation (OpenAPI), form validation, and data validation.' },
-        { question: 'What is jq and why is it useful?', answer: 'jq is a command-line JSON processor. Filter, transform, and query JSON. Essential for DevOps: parse API responses, extract values in scripts, transform data. Like sed/awk for JSON.' },
-        { question: 'How do you extract nested values with jq?', answer: 'Use dot notation: .user.address.city. For arrays: .[0], .[], .[0:3]. Combine: .users[].name. Pipe for chaining: .items | map(.name). Use -r for raw string output.' },
-        { question: 'What is JSON.stringify() used for?', answer: 'JavaScript function converting objects to JSON strings. Parameters: value, replacer (filter/transform), space (indentation). Used for API requests, localStorage, debugging. Handles nested objects.' },
-        { question: 'What is JSON.parse() used for?', answer: 'JavaScript function parsing JSON string to object. Throws SyntaxError on invalid JSON. Use try/catch for error handling. Reviver function can transform values during parsing.' },
-        { question: 'How do you pretty-print JSON?', answer: 'JavaScript: JSON.stringify(obj, null, 2). Python: json.dumps(obj, indent=2). Command line: jq . file.json or python -m json.tool. Most IDEs format JSON automatically.' },
-        { question: 'What are common JSON mistakes?', answer: 'Trailing commas (invalid), single quotes (must be double), unquoted keys, missing quotes on strings, comments, undefined values. Use linters and validators to catch errors.' },
-        { question: 'How do you merge JSON objects?', answer: 'JavaScript: {...obj1, ...obj2} spread or Object.assign(). jq: input1 * input2. Python: {**dict1, **dict2}. Deep merge needs recursive logic or libraries.' },
-        { question: 'What is JSONL/NDJSON?', answer: 'JSON Lines: one JSON object per line, newline-separated. No outer array wrapper. Efficient for streaming, logs, and large datasets. Each line is valid JSON independently.' }
+        { question: 'What is JSON and what is it used for?', answer: `JSON (JavaScript Object Notation) is a lightweight text format for data exchange.
+Used in APIs, configuration files, and data storage.
+Language-independent, human-readable, widely supported.` },
+        { question: 'What are the valid JSON data types?', answer: `Six types: string (double-quoted), number (integer or float), boolean (true/false), null, object (key-value pairs in {}), and array (ordered list in []).
+No undefined, Date, or functions.` },
+        { question: 'Why must JSON keys be quoted?', answer: `JSON spec requires double quotes around all keys for unambiguous parsing.
+Unlike JavaScript objects which allow unquoted keys, JSON is strict for interoperability across languages.` },
+        { question: 'Can JSON have comments?', answer: `No.
+Standard JSON does not support comments.
+Workarounds: use _comment keys, JSONC format (VS Code), or JSON5 extension.
+When converting from YAML, comments are stripped.` },
+        { question: 'What is the difference between JSON and YAML?', answer: `JSON: stricter syntax, no comments, more portable.
+YAML: human-readable, supports comments, anchors, multi-line strings.
+YAML is superset of JSON.
+JSON better for APIs; YAML for config files.` },
+        { question: 'How do you handle dates in JSON?', answer: `JSON has no date type.
+Use ISO 8601 string format: "2024-01-15T10:30:00Z".
+Parse to Date object in application code.
+Some APIs use Unix timestamps (seconds since epoch).` },
+        { question: 'What is JSON Schema?', answer: `JSON Schema defines structure and validation rules for JSON documents.
+Specifies types, required fields, formats, ranges.
+Used for API documentation (OpenAPI), form validation, and data validation.` },
+        { question: 'What is jq and why is it useful?', answer: `jq is a command-line JSON processor.
+Filter, transform, and query JSON.
+Essential for DevOps: parse API responses, extract values in scripts, transform data.
+Like sed/awk for JSON.` },
+        { question: 'How do you extract nested values with jq?', answer: `Use dot notation: .user.address.city.
+For arrays: .[0], .[], .[0:3].
+Combine: .users[].name.
+Pipe for chaining: .items | map(.name).
+Use -r for raw string output.` },
+        { question: 'What is JSON.stringify() used for?', answer: `JavaScript function converting objects to JSON strings.
+Parameters: value, replacer (filter/transform), space (indentation).
+Used for API requests, localStorage, debugging.
+Handles nested objects.` },
+        { question: 'What is JSON.parse() used for?', answer: `JavaScript function parsing JSON string to object.
+Throws SyntaxError on invalid JSON.
+Use try/catch for error handling.
+Reviver function can transform values during parsing.` },
+        { question: 'How do you pretty-print JSON?', answer: `JavaScript: JSON.stringify(obj, null, 2).
+Python: json.dumps(obj, indent=2).
+Command line: jq . file.json or python -m json.tool.
+Most IDEs format JSON automatically.` },
+        { question: 'What are common JSON mistakes?', answer: `Trailing commas (invalid), single quotes (must be double), unquoted keys, missing quotes on strings, comments, undefined values.
+Use linters and validators to catch errors.` },
+        { question: 'How do you merge JSON objects?', answer: `JavaScript: {...obj1, ...obj2} spread or Object.assign(). jq: input1 * input2.
+Python: {**dict1, **dict2}.
+Deep merge needs recursive logic or libraries.` },
+        { question: 'What is JSONL/NDJSON?', answer: `JSON Lines: one JSON object per line, newline-separated.
+No outer array wrapper.
+Efficient for streaming, logs, and large datasets.
+Each line is valid JSON independently.` }
     ]
 };
 

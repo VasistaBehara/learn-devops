@@ -766,24 +766,71 @@ mydevopstool/
     questions: [
         { question: 'Why is Python popular for DevOps?', answer: 'Python has rich libraries (Boto3, Ansible, Fabric), readable syntax, cross-platform support, strong community, and integrates well with APIs, cloud services, and configuration formats (YAML, JSON).' },
         { question: 'What is the difference between subprocess.run() and os.system()?', answer: 'subprocess.run() is preferred: captures output, handles errors better, more secure with shell=False. os.system() just returns exit code, outputs to terminal, always uses shell.' },
-        { question: 'How do you handle credentials securely in Python?', answer: 'Use environment variables (os.environ), AWS Secrets Manager, HashiCorp Vault, or encrypted config files. Never hardcode credentials. Use dotenv for local dev. IAM roles for AWS.' },
-        { question: 'What is the purpose of if __name__ == "__main__"?', answer: 'It checks if the script is run directly (not imported). Code under it only executes when run as main script. Allows modules to be both importable and runnable.' },
-        { question: 'How do you manage Python dependencies?', answer: 'Use requirements.txt or pyproject.toml. Virtual environments (venv) isolate dependencies. pip-tools for dependency resolution. Poetry or pipenv for advanced management.' },
-        { question: 'What is a context manager and when to use it?', answer: 'Context managers (with statement) ensure cleanup (closing files, releasing locks). Use for resources that need cleanup. Implement with __enter__/__exit__ or @contextmanager decorator.' },
-        { question: 'How do you make HTTP requests in Python?', answer: 'Use requests library for simple cases. aiohttp for async. Handle errors with raise_for_status(). Use sessions for multiple requests. Set timeouts to prevent hanging.' },
-        { question: 'What is the difference between threading and multiprocessing?', answer: 'Threading: shared memory, good for I/O-bound tasks, limited by GIL. Multiprocessing: separate memory, good for CPU-bound tasks, true parallelism. asyncio for many concurrent I/O tasks.' },
-        { question: 'How do you parse command line arguments?', answer: 'Use argparse (standard library) or click (more powerful). Define arguments, options, types, and help text. Click supports subcommands and is more Pythonic.' },
-        { question: 'What is the GIL and how does it affect concurrency?', answer: 'Global Interpreter Lock prevents true parallelism in threads. Doesn\'t affect I/O-bound tasks (threads release GIL during I/O). Use multiprocessing for CPU-bound parallel tasks.' },
-        { question: 'How do you interact with AWS using Python?', answer: 'Use boto3, the official AWS SDK. Configure credentials via environment, IAM roles, or config file. Use client for low-level API, resource for higher-level abstraction.' },
-        { question: 'What is Jinja2 and when is it used?', answer: 'Jinja2 is a templating engine for generating text from templates. Used for config files, HTML, emails. Ansible uses Jinja2 for templates. Supports variables, loops, filters.' },
-        { question: 'How do you write tests in Python?', answer: 'Use pytest (preferred) or unittest. Write test functions with assertions. Use fixtures for setup. Mock external dependencies. Run with pytest command. Aim for good coverage.' },
-        { question: 'What is the difference between list comprehension and generator expression?', answer: 'List comprehension [x for x in iterable] creates a list in memory. Generator (x for x in iterable) yields items lazily, memory efficient for large datasets.' },
-        { question: 'How do you handle errors and retries?', answer: 'Use try/except for error handling. Log exceptions. Implement retry with backoff for transient failures. Use tenacity library for advanced retry logic. Raise custom exceptions.' },
-        { question: 'What are type hints and why use them?', answer: 'Type hints (def foo(x: int) -> str:) document expected types. Caught by mypy, IDE static analysis. Improve code readability and catch bugs early. Not enforced at runtime.' },
-        { question: 'How do you work with Docker from Python?', answer: 'Use docker SDK (docker-py). Build images, run containers, execute commands, stream logs. Connect with docker.from_env(). Useful for testing and automation.' },
-        { question: 'What is a virtual environment and why use it?', answer: 'Virtual environments isolate project dependencies. Create with python -m venv .venv. Activate before installing packages. Prevents conflicts between projects. Essential for reproducible builds.' },
-        { question: 'How do you read and write YAML in Python?', answer: 'Use PyYAML library. yaml.safe_load() for reading, yaml.dump() for writing. safe_load prevents arbitrary code execution. Supports multiple documents with safe_load_all().' },
-        { question: 'What is the best way to structure a Python project?', answer: 'Use src layout, separate tests directory, pyproject.toml for configuration. Include README, requirements. Use __init__.py for packages. Follow PEP 8 style guide. Use git and CI/CD.' }
+        { question: 'How do you handle credentials securely in Python?', answer: `Use environment variables (os.environ), AWS Secrets Manager, HashiCorp Vault, or encrypted config files.
+Never hardcode credentials.
+Use dotenv for local dev.
+IAM roles for AWS.` },
+        { question: 'What is the purpose of if __name__ == "__main__"?', answer: `It checks if the script is run directly (not imported).
+Code under it only executes when run as main script.
+Allows modules to be both importable and runnable.` },
+        { question: 'How do you manage Python dependencies?', answer: `Use requirements.txt or pyproject.toml.
+Virtual environments (venv) isolate dependencies. pip-tools for dependency resolution.
+Poetry or pipenv for advanced management.` },
+        { question: 'What is a context manager and when to use it?', answer: `Context managers (with statement) ensure cleanup (closing files, releasing locks).
+Use for resources that need cleanup.
+Implement with __enter__/__exit__ or @contextmanager decorator.` },
+        { question: 'How do you make HTTP requests in Python?', answer: `Use requests library for simple cases. aiohttp for async.
+Handle errors with raise_for_status().
+Use sessions for multiple requests.
+Set timeouts to prevent hanging.` },
+        { question: 'What is the difference between threading and multiprocessing?', answer: `Threading: shared memory, good for I/O-bound tasks, limited by GIL.
+Multiprocessing: separate memory, good for CPU-bound tasks, true parallelism. asyncio for many concurrent I/O tasks.` },
+        { question: 'How do you parse command line arguments?', answer: `Use argparse (standard library) or click (more powerful).
+Define arguments, options, types, and help text.
+Click supports subcommands and is more Pythonic.` },
+        { question: 'What is the GIL and how does it affect concurrency?', answer: `Global Interpreter Lock prevents true parallelism in threads.
+Doesn't affect I/O-bound tasks (threads release GIL during I/O).
+Use multiprocessing for CPU-bound parallel tasks.` },
+        { question: 'How do you interact with AWS using Python?', answer: `Use boto3, the official AWS SDK.
+Configure credentials via environment, IAM roles, or config file.
+Use client for low-level API, resource for higher-level abstraction.` },
+        { question: 'What is Jinja2 and when is it used?', answer: `Jinja2 is a templating engine for generating text from templates.
+Used for config files, HTML, emails.
+Ansible uses Jinja2 for templates.
+Supports variables, loops, filters.` },
+        { question: 'How do you write tests in Python?', answer: `Use pytest (preferred) or unittest.
+Write test functions with assertions.
+Use fixtures for setup.
+Mock external dependencies.
+Run with pytest command.
+Aim for good coverage.` },
+        { question: 'What is the difference between list comprehension and generator expression?', answer: `List comprehension [x for x in iterable] creates a list in memory.
+Generator (x for x in iterable) yields items lazily, memory efficient for large datasets.` },
+        { question: 'How do you handle errors and retries?', answer: `Use try/except for error handling.
+Log exceptions.
+Implement retry with backoff for transient failures.
+Use tenacity library for advanced retry logic.
+Raise custom exceptions.` },
+        { question: 'What are type hints and why use them?', answer: `Type hints (def foo(x: int) -> str:) document expected types.
+Caught by mypy, IDE static analysis.
+Improve code readability and catch bugs early.
+Not enforced at runtime.` },
+        { question: 'How do you work with Docker from Python?', answer: `Use docker SDK (docker-py).
+Build images, run containers, execute commands, stream logs.
+Connect with docker.from_env().
+Useful for testing and automation.` },
+        { question: 'What is a virtual environment and why use it?', answer: `Virtual environments isolate project dependencies.
+Create with python -m venv .venv.
+Activate before installing packages.
+Prevents conflicts between projects.
+Essential for reproducible builds.` },
+        { question: 'How do you read and write YAML in Python?', answer: `Use PyYAML library. yaml.safe_load() for reading, yaml.dump() for writing. safe_load prevents arbitrary code execution.
+Supports multiple documents with safe_load_all().` },
+        { question: 'What is the best way to structure a Python project?', answer: `Use src layout, separate tests directory, pyproject.toml for configuration.
+Include README, requirements.
+Use __init__.py for packages.
+Follow PEP 8 style guide.
+Use git and CI/CD.` }
     ]
 };
 

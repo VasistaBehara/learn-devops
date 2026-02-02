@@ -170,20 +170,69 @@ rules:
         }
     ],
     questions: [
-        { question: 'What is the difference between a Pod and a Deployment?', answer: `Pod: Single instance, ephemeral, no self-healing. Deployment: Manages pods via ReplicaSet, handles scaling, rollouts, rollbacks. Always use Deployments for production.` },
-        { question: 'Explain Kubernetes Service types.', answer: `ClusterIP: Internal only (default). NodePort: Exposes on each node's IP. LoadBalancer: Provisions cloud LB. ExternalName: DNS alias. Choose based on access requirements.` },
-        { question: 'What is the difference between ConfigMap and Secret?', answer: `ConfigMap: Non-sensitive config data. Secret: Sensitive data, base64 encoded (not encrypted by default). Both mount as volumes/env vars. Encrypt Secrets at rest.` },
-        { question: 'How does Kubernetes networking work?', answer: `Every pod gets unique IP. Pods can communicate directly. CNI plugins implement networking (Calico, Flannel, Cilium). Services provide stable endpoints. kube-proxy routes traffic.` },
-        { question: 'Explain readiness vs liveness probes.', answer: `Liveness: Is container alive? Fail = restart. Readiness: Can container serve traffic? Fail = remove from service. Startup probe for slow-starting apps. Critical for reliability.` },
-        { question: 'What is a StatefulSet?', answer: `For stateful apps (databases). Stable network identity, persistent storage, ordered deployment/scaling. Pods named sequentially: web-0, web-1. Headless service for direct access.` },
-        { question: 'How does HPA work?', answer: `Scales pods based on metrics (CPU/memory/custom). Queries metrics-server. Calculates desired replicas. Min/max bounds. Cooldown prevents thrashing. Needs resource requests set.` },
-        { question: 'What is an Ingress Controller?', answer: `Implementation of Ingress rules. Not built into K8s - must install. Options: nginx, traefik, HAProxy, cloud-specific. Handles HTTP routing, TLS, load balancing.` },
-        { question: 'Explain Kubernetes RBAC.', answer: `Role: Namespace permissions. ClusterRole: Cluster-wide permissions. RoleBinding: Grants Role to subjects. ClusterRoleBinding: Grants ClusterRole. Subjects: users, groups, service accounts.` },
-        { question: 'What is a DaemonSet?', answer: `Ensures pod runs on all (or selected) nodes. Use for: logging agents, monitoring, storage daemons. Automatically adds pods to new nodes. One pod per node.` },
-        { question: 'How do you debug pods?', answer: `kubectl describe pod: Events, status. kubectl logs: Container logs. kubectl exec -it: Shell access. kubectl get events: Cluster events. Check resource limits, probes, image pulls.` },
-        { question: 'What is the difference between PV and PVC?', answer: `PV: Admin-provisioned storage resource. PVC: Developer's storage request. PVC binds to matching PV. StorageClass enables dynamic provisioning. Decouples storage from pods.` },
-        { question: 'Explain Kubernetes namespaces.', answer: `Virtual clusters for isolation. Scope resources, RBAC, quotas. Good for: teams, environments, projects. Some resources cluster-wide (nodes, PVs). Avoid too many namespaces.` },
-        { question: 'What are init containers?', answer: `Run before main containers. Must complete successfully. Use for: setup, wait for dependencies, config. Run sequentially. Share volumes with main containers.` },
-        { question: 'How do rolling updates work?', answer: `Deployment gradually replaces pods. Controlled by maxSurge (extra pods) and maxUnavailable. Zero-downtime updates. Rollback with kubectl rollout undo if issues detected.` }
+        { question: 'What is the difference between a Pod and a Deployment?', answer: `Pod: Single instance, ephemeral, no self-healing.
+Deployment: Manages pods via ReplicaSet, handles scaling, rollouts, rollbacks.
+Always use Deployments for production.` },
+        { question: 'Explain Kubernetes Service types.', answer: `ClusterIP: Internal only (default).
+NodePort: Exposes on each node's IP.
+LoadBalancer: Provisions cloud LB.
+ExternalName: DNS alias.
+Choose based on access requirements.` },
+        { question: 'What is the difference between ConfigMap and Secret?', answer: `ConfigMap: Non-sensitive config data.
+Secret: Sensitive data, base64 encoded (not encrypted by default).
+Both mount as volumes/env vars.
+Encrypt Secrets at rest.` },
+        { question: 'How does Kubernetes networking work?', answer: `Every pod gets unique IP.
+Pods can communicate directly.
+CNI plugins implement networking (Calico, Flannel, Cilium).
+Services provide stable endpoints. kube-proxy routes traffic.` },
+        { question: 'Explain readiness vs liveness probes.', answer: `Liveness: Is container alive? Fail = restart.
+Readiness: Can container serve traffic? Fail = remove from service.
+Startup probe for slow-starting apps.
+Critical for reliability.` },
+        { question: 'What is a StatefulSet?', answer: `For stateful apps (databases).
+Stable network identity, persistent storage, ordered deployment/scaling.
+Pods named sequentially: web-0, web-1.
+Headless service for direct access.` },
+        { question: 'How does HPA work?', answer: `Scales pods based on metrics (CPU/memory/custom).
+Queries metrics-server.
+Calculates desired replicas.
+Min/max bounds.
+Cooldown prevents thrashing.
+Needs resource requests set.` },
+        { question: 'What is an Ingress Controller?', answer: `Implementation of Ingress rules.
+Not built into K8s - must install.
+Options: nginx, traefik, HAProxy, cloud-specific.
+Handles HTTP routing, TLS, load balancing.` },
+        { question: 'Explain Kubernetes RBAC.', answer: `Role: Namespace permissions.
+ClusterRole: Cluster-wide permissions.
+RoleBinding: Grants Role to subjects.
+ClusterRoleBinding: Grants ClusterRole.
+Subjects: users, groups, service accounts.` },
+        { question: 'What is a DaemonSet?', answer: `Ensures pod runs on all (or selected) nodes.
+Use for: logging agents, monitoring, storage daemons.
+Automatically adds pods to new nodes.
+One pod per node.` },
+        { question: 'How do you debug pods?', answer: `kubectl describe pod: Events, status. kubectl logs: Container logs. kubectl exec -it: Shell access. kubectl get events: Cluster events.
+Check resource limits, probes, image pulls.` },
+        { question: 'What is the difference between PV and PVC?', answer: `PV: Admin-provisioned storage resource.
+PVC: Developer's storage request.
+PVC binds to matching PV.
+StorageClass enables dynamic provisioning.
+Decouples storage from pods.` },
+        { question: 'Explain Kubernetes namespaces.', answer: `Virtual clusters for isolation.
+Scope resources, RBAC, quotas.
+Good for: teams, environments, projects.
+Some resources cluster-wide (nodes, PVs).
+Avoid too many namespaces.` },
+        { question: 'What are init containers?', answer: `Run before main containers.
+Must complete successfully.
+Use for: setup, wait for dependencies, config.
+Run sequentially.
+Share volumes with main containers.` },
+        { question: 'How do rolling updates work?', answer: `Deployment gradually replaces pods.
+Controlled by maxSurge (extra pods) and maxUnavailable.
+Zero-downtime updates.
+Rollback with kubectl rollout undo if issues detected.` }
     ]
 };

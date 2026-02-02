@@ -148,20 +148,57 @@ Pin provider versions. Use modules for reusability. Store state remotely with lo
         }
     ],
     questions: [
-        { question: 'What is Terraform state and why is it important?', answer: `State maps configuration to real resources. Stores metadata, tracks dependencies, improves performance. Without state, Terraform can't know what exists. Store remotely in production for collaboration and locking.` },
-        { question: 'Explain plan vs apply.', answer: `Plan: Dry run showing what will change (+create, ~update, -destroy). No changes made. Apply: Executes the plan to create/update/destroy resources. Always review plan before apply.` },
-        { question: 'What is a Terraform provider?', answer: `Plugin that interacts with an API. Translates HCL to API calls. Examples: AWS, Azure, GCP, Kubernetes. Specified in required_providers block with version constraints.` },
-        { question: 'How do you manage secrets in Terraform?', answer: `Mark variables as sensitive. Use environment variables (TF_VAR_name). Integrate with secret managers (Vault, AWS Secrets Manager). Never commit secrets to VCS.` },
-        { question: 'What are Terraform modules?', answer: `Reusable packages of Terraform configs. Encapsulate resources, accept inputs, produce outputs. Use registry modules or write custom. Version for stability.` },
-        { question: 'Explain state locking.', answer: `Prevents concurrent modifications. DynamoDB for S3 backend, built-in for Terraform Cloud. Avoids race conditions. Force-unlock if needed (dangerous).` },
-        { question: 'What is terraform import?', answer: `Imports existing resources into state. Doesn't generate configuration - you must write matching HCL. Use for brownfield adoption. Import block (1.5+) generates config.` },
-        { question: 'How do workspaces differ from directories?', answer: `Workspaces: Same config, separate state. Good for similar environments. Directories: Separate configs entirely. Better for significantly different environments.` },
-        { question: 'What is a data source?', answer: `Reads information from provider without creating resources. Fetch AMI IDs, existing VPCs, remote state. Read-only, doesn't manage lifecycle.` },
-        { question: 'Explain depends_on.', answer: `Explicit dependency when Terraform can't detect from references. Rare - usually implicit is sufficient. Needed for hidden dependencies like IAM policies.` },
-        { question: 'What is Terraform drift?', answer: `When real infrastructure differs from state. Caused by manual changes. Detect with terraform plan. Fix by applying or importing. Prevent with CI/CD.` },
-        { question: 'How do you handle multiple environments?', answer: `Options: Workspaces (same config), -var-file per environment, separate directories with modules, Terragrunt. Remote backends per environment for isolation.` },
-        { question: 'What is the for_each argument?', answer: `Creates multiple instances from map or set. Better than count for non-sequential resources. Removes by key, not index shift. Use for resources needing unique identifiers.` },
+        { question: 'What is Terraform state and why is it important?', answer: `State maps configuration to real resources.
+Stores metadata, tracks dependencies, improves performance.
+Without state, Terraform can't know what exists.
+Store remotely in production for collaboration and locking.` },
+        { question: 'Explain plan vs apply.', answer: `Plan: Dry run showing what will change (+create, ~update, -destroy).
+No changes made.
+Apply: Executes the plan to create/update/destroy resources.
+Always review plan before apply.` },
+        { question: 'What is a Terraform provider?', answer: `Plugin that interacts with an API.
+Translates HCL to API calls.
+Examples: AWS, Azure, GCP, Kubernetes.
+Specified in required_providers block with version constraints.` },
+        { question: 'How do you manage secrets in Terraform?', answer: `Mark variables as sensitive.
+Use environment variables (TF_VAR_name).
+Integrate with secret managers (Vault, AWS Secrets Manager).
+Never commit secrets to VCS.` },
+        { question: 'What are Terraform modules?', answer: `Reusable packages of Terraform configs.
+Encapsulate resources, accept inputs, produce outputs.
+Use registry modules or write custom.
+Version for stability.` },
+        { question: 'Explain state locking.', answer: `Prevents concurrent modifications.
+DynamoDB for S3 backend, built-in for Terraform Cloud.
+Avoids race conditions.
+Force-unlock if needed (dangerous).` },
+        { question: 'What is terraform import?', answer: `Imports existing resources into state.
+Doesn't generate configuration - you must write matching HCL.
+Use for brownfield adoption.
+Import block (1.5+) generates config.` },
+        { question: 'How do workspaces differ from directories?', answer: `Workspaces: Same config, separate state.
+Good for similar environments.
+Directories: Separate configs entirely.
+Better for significantly different environments.` },
+        { question: 'What is a data source?', answer: `Reads information from provider without creating resources.
+Fetch AMI IDs, existing VPCs, remote state.
+Read-only, doesn't manage lifecycle.` },
+        { question: 'Explain depends_on.', answer: `Explicit dependency when Terraform can't detect from references.
+Rare - usually implicit is sufficient.
+Needed for hidden dependencies like IAM policies.` },
+        { question: 'What is Terraform drift?', answer: `When real infrastructure differs from state.
+Caused by manual changes.
+Detect with terraform plan.
+Fix by applying or importing.
+Prevent with CI/CD.` },
+        { question: 'How do you handle multiple environments?', answer: `Options: Workspaces (same config), -var-file per environment, separate directories with modules, Terragrunt.
+Remote backends per environment for isolation.` },
+        { question: 'What is the for_each argument?', answer: `Creates multiple instances from map or set.
+Better than count for non-sequential resources.
+Removes by key, not index shift.
+Use for resources needing unique identifiers.` },
         { question: 'Explain lifecycle rules.', answer: `create_before_destroy: New resource before destroying old. prevent_destroy: Blocks destruction. ignore_changes: Exclude attributes from plan. replace_triggered_by: Force replacement.` },
-        { question: 'What is Terraform Cloud vs Enterprise?', answer: `Cloud: SaaS, free tier, remote state/run, VCS integration, Sentinel. Enterprise: Self-hosted, air-gapped support, audit logging, SSO, advanced features.` }
+        { question: 'What is Terraform Cloud vs Enterprise?', answer: `Cloud: SaaS, free tier, remote state/run, VCS integration, Sentinel.
+Enterprise: Self-hosted, air-gapped support, audit logging, SSO, advanced features.` }
     ]
 };

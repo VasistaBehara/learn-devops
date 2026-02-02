@@ -228,21 +228,53 @@ aws cloudformation describe-stack-resource-drifts \\
         }
     ],
     questions: [
-        { question: 'What is AWS CloudFormation?', answer: 'CloudFormation is AWS\'s Infrastructure as Code service. Define resources in YAML/JSON templates, and CloudFormation provisions and manages them as stacks. It handles dependencies, rollbacks on failure, and tracks resource state.' },
-        { question: 'What is the difference between CloudFormation and Terraform?', answer: 'CloudFormation is AWS-only, free, tightly integrated with AWS. Terraform is multi-cloud, has larger community, uses HCL syntax. CloudFormation has StackSets for multi-account; Terraform needs workspaces or separate configs.' },
-        { question: 'How do you handle secrets in CloudFormation?', answer: 'Use NoEcho parameter (hides in console), reference Secrets Manager/SSM Parameter Store via dynamic references ({{resolve:secretsmanager:...}}), or pass ARN and retrieve in application. Never hardcode secrets in templates.' },
-        { question: 'What is a change set and why use it?', answer: 'Change sets preview stack updates before applying. They show: resources added, modified (with replacement risk), or deleted. Essential for production to avoid accidental data loss or service disruption.' },
-        { question: 'How does CloudFormation handle rollback?', answer: 'On stack creation failure, CloudFormation deletes created resources by default. On update failure, it rolls back to previous state. Can disable rollback for debugging. Stack events show failure reasons.' },
-        { question: 'What is drift detection?', answer: 'Drift detection compares actual resource configuration to template definition. Detects manual changes made outside CloudFormation. Shows MODIFIED, DELETED, or IN_SYNC status. Not all resource types supported.' },
-        { question: 'How do you organize large CloudFormation templates?', answer: 'Use nested stacks for modularity. Use cross-stack references (Export/ImportValue). Use AWS CDK for complex logic. Follow single-responsibility principle. Keep templates under 1MB limit.' },
-        { question: 'What are StackSets used for?', answer: 'StackSets deploy stacks across multiple accounts and regions simultaneously. Use for: security baselines, compliance standards, shared services. Supports AWS Organizations integration for automatic deployment.' },
-        { question: 'How do intrinsic functions work?', answer: 'Intrinsic functions compute values at runtime: !Ref (reference), !GetAtt (get attribute), !Sub (substitute), !Join (concatenate), !If (conditional), !FindInMap (lookup). They enable dynamic, reusable templates.' },
-        { question: 'What happens when you delete a stack?', answer: 'CloudFormation deletes all resources in the stack (unless they have DeletionPolicy: Retain). Deletion respects dependencies (reverse order). Some resources (like non-empty S3 buckets) may cause deletion to fail.' },
-        { question: 'How do you implement blue-green deployments?', answer: 'Create new resources alongside old (AutoScalingReplacingUpdate), use weighted routing in Route 53, or update ALB target groups. CodeDeploy integration for EC2. Step Functions for orchestration.' },
-        { question: 'What is UpdateReplacePolicy vs DeletionPolicy?', answer: 'DeletionPolicy: controls what happens when stack is deleted (Delete, Retain, Snapshot). UpdateReplacePolicy: controls what happens when resource is replaced during update. Both can preserve data.' },
-        { question: 'How do you handle circular dependencies?', answer: 'Circular dependencies occur when resources reference each other. Solutions: use DependsOn to order, break into separate stacks with exports, use Lambda custom resource to configure after creation.' },
-        { question: 'What is AWS CDK and how does it relate to CloudFormation?', answer: 'CDK lets you define infrastructure in programming languages (TypeScript, Python, Java). It synthesizes to CloudFormation templates. Provides higher level constructs, loops, conditionals. CloudFormation executes the synthesized templates.' },
-        { question: 'How do you import existing resources into a stack?', answer: 'Use resource import feature: create template with existing resource, specify identifiers, import. CloudFormation adopts the resource. Requires: resource supports import, template matches current config, identifier is unique.' }
+        { question: 'What is AWS CloudFormation?', answer: `CloudFormation is AWS's Infrastructure as Code service.
+Define resources in YAML/JSON templates, and CloudFormation provisions and manages them as stacks.
+It handles dependencies, rollbacks on failure, and tracks resource state.` },
+        { question: 'What is the difference between CloudFormation and Terraform?', answer: `CloudFormation is AWS-only, free, tightly integrated with AWS.
+Terraform is multi-cloud, has larger community, uses HCL syntax.
+CloudFormation has StackSets for multi-account; Terraform needs workspaces or separate configs.` },
+        { question: 'How do you handle secrets in CloudFormation?', answer: `Use NoEcho parameter (hides in console), reference Secrets Manager/SSM Parameter Store via dynamic references ({{resolve:secretsmanager:...}}), or pass ARN and retrieve in application.
+Never hardcode secrets in templates.` },
+        { question: 'What is a change set and why use it?', answer: `Change sets preview stack updates before applying.
+They show: resources added, modified (with replacement risk), or deleted.
+Essential for production to avoid accidental data loss or service disruption.` },
+        { question: 'How does CloudFormation handle rollback?', answer: `On stack creation failure, CloudFormation deletes created resources by default.
+On update failure, it rolls back to previous state.
+Can disable rollback for debugging.
+Stack events show failure reasons.` },
+        { question: 'What is drift detection?', answer: `Drift detection compares actual resource configuration to template definition.
+Detects manual changes made outside CloudFormation.
+Shows MODIFIED, DELETED, or IN_SYNC status.
+Not all resource types supported.` },
+        { question: 'How do you organize large CloudFormation templates?', answer: `Use nested stacks for modularity.
+Use cross-stack references (Export/ImportValue).
+Use AWS CDK for complex logic.
+Follow single-responsibility principle.
+Keep templates under 1MB limit.` },
+        { question: 'What are StackSets used for?', answer: `StackSets deploy stacks across multiple accounts and regions simultaneously.
+Use for: security baselines, compliance standards, shared services.
+Supports AWS Organizations integration for automatic deployment.` },
+        { question: 'How do intrinsic functions work?', answer: `Intrinsic functions compute values at runtime: !Ref (reference), !GetAtt (get attribute), !Sub (substitute), !Join (concatenate), !If (conditional), !FindInMap (lookup).
+They enable dynamic, reusable templates.` },
+        { question: 'What happens when you delete a stack?', answer: `CloudFormation deletes all resources in the stack (unless they have DeletionPolicy: Retain).
+Deletion respects dependencies (reverse order).
+Some resources (like non-empty S3 buckets) may cause deletion to fail.` },
+        { question: 'How do you implement blue-green deployments?', answer: `Create new resources alongside old (AutoScalingReplacingUpdate), use weighted routing in Route 53, or update ALB target groups.
+CodeDeploy integration for EC2.
+Step Functions for orchestration.` },
+        { question: 'What is UpdateReplacePolicy vs DeletionPolicy?', answer: `DeletionPolicy: controls what happens when stack is deleted (Delete, Retain, Snapshot).
+UpdateReplacePolicy: controls what happens when resource is replaced during update.
+Both can preserve data.` },
+        { question: 'How do you handle circular dependencies?', answer: `Circular dependencies occur when resources reference each other.
+Solutions: use DependsOn to order, break into separate stacks with exports, use Lambda custom resource to configure after creation.` },
+        { question: 'What is AWS CDK and how does it relate to CloudFormation?', answer: `CDK lets you define infrastructure in programming languages (TypeScript, Python, Java).
+It synthesizes to CloudFormation templates.
+Provides higher level constructs, loops, conditionals.
+CloudFormation executes the synthesized templates.` },
+        { question: 'How do you import existing resources into a stack?', answer: `Use resource import feature: create template with existing resource, specify identifiers, import.
+CloudFormation adopts the resource.
+Requires: resource supports import, template matches current config, identifier is unique.` }
     ]
 };
 

@@ -146,20 +146,74 @@ Security dashboard shows vulnerabilities. Require approval based on severity.`,
         }
     ],
     questions: [
-        { question: 'What is the difference between cache and artifacts?', answer: `Cache: Best-effort, speeds up jobs by reusing files across pipelines (node_modules). May not exist. Artifacts: Guaranteed, passes data between jobs/stages, downloadable after pipeline. Use cache for dependencies, artifacts for outputs.` },
-        { question: 'Explain GitLab Runner executors.', answer: `Shell: Runs on runner host. Docker: Each job in container. Kubernetes: Jobs as pods. Docker Machine: Auto-scales VM runners. Docker is most common. Choose based on isolation needs and environment.` },
-        { question: 'What are protected branches and tags?', answer: `Prevent force push, deletion. Restrict who can push/merge. Protected variables only available on protected branches. Protected environments tied to protected branches. Essential for production deployments.` },
-        { question: 'How do merge trains work?', answer: `Queue of MRs merged sequentially. Each tested with all preceding changes. Prevents broken main branch. Automatically rebases and tests. Requires premium tier. Great for high-velocity teams.` },
-        { question: 'What is the needs keyword?', answer: `Creates DAG (Directed Acyclic Graph) pipeline. Jobs start when dependencies finish, not when stage completes. Faster pipelines by parallelizing. Specify which jobs a job depends on.` },
-        { question: 'How do you handle secrets in GitLab CI?', answer: `Project/Group CI/CD variables. Mark as masked (hidden in logs) and protected (only protected branches). Use Vault integration. Never commit secrets. File type variables for certificates.` },
-        { question: 'Explain rules vs only/except.', answer: `only/except: Legacy, simple branch/tag matching. rules: Powerful, complex conditions with if/changes/exists. rules preferred. Can combine multiple conditions. Can set when: manual/delayed.` },
-        { question: 'What is Auto DevOps?', answer: `Pre-configured CI/CD pipeline. Auto Build, Test, Deploy, Review, Security. Detects language, uses buildpacks. Good starting point. Customizable via variables and overrides.` },
-        { question: 'How do review apps work?', answer: `Deploy MR to temporary environment. Automatic cleanup on merge/close. Environment per MR using CI_COMMIT_REF_SLUG. Stakeholders can preview changes. Requires dynamic environment setup.` },
-        { question: 'What is GitLab Pages?', answer: `Static site hosting. Deploy from CI/CD. Custom domains with TLS. Public or access-controlled. Perfect for documentation, blogs. Article in public/ directory.` },
-        { question: 'Explain include and extends.', answer: `include: Import external YAML (local, remote, template). extends: Inherit from job template. Both promote reuse. include for shared configs, extends for job templates.` },
-        { question: 'What are GitLab releases?', answer: `Snapshot of source + artifacts at tag. Release notes, milestones, links. Created manually or via API/CI. release-cli tool for automation. Integrates with packages.` },
-        { question: 'How do you debug failing pipelines?', answer: `Check job logs. Use CI_DEBUG_TRACE=true for verbose output. artifacts:when:on_failure to save debug info. Local runner with gitlab-runner exec. Interactive web terminal (premium).` },
-        { question: 'What is the parent-child pipeline?', answer: `Trigger child pipelines from parent. Separate .gitlab-ci.yml per component. Reduces complexity. Child inherits or overrides variables. Good for monorepos.` },
-        { question: 'Explain GitLab Package Registry.', answer: `Store packages: npm, Maven, PyPI, NuGet, Composer, Conan, Helm, Go. Per-project or instance-level. Version management. Integrates with CI/CD. Alternative to external registries.` }
+        { question: 'What is the difference between cache and artifacts?', answer: `Cache: Best-effort, speeds up jobs by reusing files across pipelines (node_modules).
+May not exist.
+Artifacts: Guaranteed, passes data between jobs/stages, downloadable after pipeline.
+Use cache for dependencies, artifacts for outputs.` },
+        { question: 'Explain GitLab Runner executors.', answer: `Shell: Runs on runner host.
+Docker: Each job in container.
+Kubernetes: Jobs as pods.
+Docker Machine: Auto-scales VM runners.
+Docker is most common.
+Choose based on isolation needs and environment.` },
+        { question: 'What are protected branches and tags?', answer: `Prevent force push, deletion.
+Restrict who can push/merge.
+Protected variables only available on protected branches.
+Protected environments tied to protected branches.
+Essential for production deployments.` },
+        { question: 'How do merge trains work?', answer: `Queue of MRs merged sequentially.
+Each tested with all preceding changes.
+Prevents broken main branch.
+Automatically rebases and tests.
+Requires premium tier.
+Great for high-velocity teams.` },
+        { question: 'What is the needs keyword?', answer: `Creates DAG (Directed Acyclic Graph) pipeline.
+Jobs start when dependencies finish, not when stage completes.
+Faster pipelines by parallelizing.
+Specify which jobs a job depends on.` },
+        { question: 'How do you handle secrets in GitLab CI?', answer: `Project/Group CI/CD variables.
+Mark as masked (hidden in logs) and protected (only protected branches).
+Use Vault integration.
+Never commit secrets.
+File type variables for certificates.` },
+        { question: 'Explain rules vs only/except.', answer: `only/except: Legacy, simple branch/tag matching. rules: Powerful, complex conditions with if/changes/exists. rules preferred.
+Can combine multiple conditions.
+Can set when: manual/delayed.` },
+        { question: 'What is Auto DevOps?', answer: `Pre-configured CI/CD pipeline.
+Auto Build, Test, Deploy, Review, Security.
+Detects language, uses buildpacks.
+Good starting point.
+Customizable via variables and overrides.` },
+        { question: 'How do review apps work?', answer: `Deploy MR to temporary environment.
+Automatic cleanup on merge/close.
+Environment per MR using CI_COMMIT_REF_SLUG.
+Stakeholders can preview changes.
+Requires dynamic environment setup.` },
+        { question: 'What is GitLab Pages?', answer: `Static site hosting.
+Deploy from CI/CD.
+Custom domains with TLS.
+Public or access-controlled.
+Perfect for documentation, blogs.
+Article in public/ directory.` },
+        { question: 'Explain include and extends.', answer: `include: Import external YAML (local, remote, template). extends: Inherit from job template.
+Both promote reuse. include for shared configs, extends for job templates.` },
+        { question: 'What are GitLab releases?', answer: `Snapshot of source + artifacts at tag.
+Release notes, milestones, links.
+Created manually or via API/CI. release-cli tool for automation.
+Integrates with packages.` },
+        { question: 'How do you debug failing pipelines?', answer: `Check job logs.
+Use CI_DEBUG_TRACE=true for verbose output. artifacts:when:on_failure to save debug info.
+Local runner with gitlab-runner exec.
+Interactive web terminal (premium).` },
+        { question: 'What is the parent-child pipeline?', answer: `Trigger child pipelines from parent.
+Separate .gitlab-ci.yml per component.
+Reduces complexity.
+Child inherits or overrides variables.
+Good for monorepos.` },
+        { question: 'Explain GitLab Package Registry.', answer: `Store packages: npm, Maven, PyPI, NuGet, Composer, Conan, Helm, Go.
+Per-project or instance-level.
+Version management.
+Integrates with CI/CD.
+Alternative to external registries.` }
     ]
 };

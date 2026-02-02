@@ -196,21 +196,48 @@ spec:
         }
     ],
     questions: [
-        { question: 'What is Helm and why is it used?', answer: 'Helm is a package manager for Kubernetes that packages related resources into charts. It solves: complex deployments, configuration management, dependency handling, and release versioning/rollback.' },
-        { question: 'What is the difference between Helm 2 and Helm 3?', answer: 'Helm 3 removed Tiller (server component), improving security. It uses 3-way strategic merge for upgrades, stores releases in Kubernetes secrets, and added JSON schema validation. Helm 2 is deprecated.' },
-        { question: 'How do you create a new Helm chart?', answer: 'Run "helm create mychart" to scaffold a new chart with default templates. Customize templates/, values.yaml, and Chart.yaml. Test with "helm template" and "helm lint" before installing.' },
-        { question: 'How do you pass custom values to a Helm chart?', answer: 'Use --set for individual values (--set replicaCount=3), -f for values files (-f prod-values.yaml), or --set-file for file contents. Priority: --set > -f flags > chart defaults.' },
-        { question: 'What is the purpose of _helpers.tpl?', answer: '_helpers.tpl contains named templates (define/include) for reusable snippets like labels, names, and selectors. It reduces duplication and ensures consistency across chart templates.' },
-        { question: 'How do you manage Helm chart dependencies?', answer: 'Define in Chart.yaml dependencies section. Run "helm dependency update" to download to charts/. Use condition or tags to optionally enable. Can also manually place charts in charts/ folder.' },
-        { question: 'How do you rollback a failed Helm deployment?', answer: 'Use "helm history <release>" to see revisions. Run "helm rollback <release> <revision>" to restore. Helm 3\'s 3-way merge handles rollbacks more intelligently than Helm 2.' },
-        { question: 'What are Helm hooks and when are they used?', answer: 'Hooks run resources at lifecycle points: pre/post-install, pre/post-upgrade, pre/post-delete, test. Use for: database migrations, backups before upgrade, cleanup, validation.' },
+        { question: 'What is Helm and why is it used?', answer: `Helm is a package manager for Kubernetes that packages related resources into charts.
+It solves: complex deployments, configuration management, dependency handling, and release versioning/rollback.` },
+        { question: 'What is the difference between Helm 2 and Helm 3?', answer: `Helm 3 removed Tiller (server component), improving security.
+It uses 3-way strategic merge for upgrades, stores releases in Kubernetes secrets, and added JSON schema validation.
+Helm 2 is deprecated.` },
+        { question: 'How do you create a new Helm chart?', answer: `Run "helm create mychart" to scaffold a new chart with default templates.
+Customize templates/, values.yaml, and Chart.yaml.
+Test with "helm template" and "helm lint" before installing.` },
+        { question: 'How do you pass custom values to a Helm chart?', answer: `Use --set for individual values (--set replicaCount=3), -f for values files (-f prod-values.yaml), or --set-file for file contents.
+Priority: --set > -f flags > chart defaults.` },
+        { question: 'What is the purpose of _helpers.tpl?', answer: `_helpers.tpl contains named templates (define/include) for reusable snippets like labels, names, and selectors.
+It reduces duplication and ensures consistency across chart templates.` },
+        { question: 'How do you manage Helm chart dependencies?', answer: `Define in Chart.yaml dependencies section.
+Run "helm dependency update" to download to charts/.
+Use condition or tags to optionally enable.
+Can also manually place charts in charts/ folder.` },
+        { question: 'How do you rollback a failed Helm deployment?', answer: `Use "helm history <release>" to see revisions.
+Run "helm rollback <release> <revision>" to restore.
+Helm 3's 3-way merge handles rollbacks more intelligently than Helm 2.` },
+        { question: 'What are Helm hooks and when are they used?', answer: `Hooks run resources at lifecycle points: pre/post-install, pre/post-upgrade, pre/post-delete, test.
+Use for: database migrations, backups before upgrade, cleanup, validation.` },
         { question: 'How do you test Helm charts?', answer: 'Use "helm lint" for static analysis. "helm template" for local rendering. "helm install --dry-run" for server-side validation. helm-unittest plugin for unit tests. helm test for integration tests.' },
-        { question: 'What is values.schema.json used for?', answer: 'JSON schema that validates values input. Catches type errors, missing required values, and invalid configurations before installation. Improves chart usability with clear validation messages.' },
-        { question: 'How do you version and release Helm charts?', answer: 'Update version in Chart.yaml following SemVer. Use appVersion for application version. Package with "helm package". Host in chart repository (ChartMuseum, GitHub Pages, OCI registry).' },
+        { question: 'What is values.schema.json used for?', answer: `JSON schema that validates values input.
+Catches type errors, missing required values, and invalid configurations before installation.
+Improves chart usability with clear validation messages.` },
+        { question: 'How do you version and release Helm charts?', answer: `Update version in Chart.yaml following SemVer.
+Use appVersion for application version.
+Package with "helm package".
+Host in chart repository (ChartMuseum, GitHub Pages, OCI registry).` },
         { question: 'What is the difference between helm template and helm install --dry-run?', answer: 'helm template renders locally without cluster access. helm install --dry-run sends to cluster for server-side validation but doesn\'t persist. --dry-run catches issues template misses (e.g., CRD validation).' },
-        { question: 'How do you store Helm charts in OCI registries?', answer: 'Helm 3.8+ supports OCI registries natively. Use "helm push chart.tgz oci://registry/repo". Pull with "helm pull oci://registry/repo/chart". Works with Docker Hub, ECR, GCR, ACR.' },
-        { question: 'How do you handle secrets in Helm charts?', answer: 'Never commit secrets in values. Use external secrets operators (External Secrets, Sealed Secrets). Reference existing secrets. Use helm-secrets plugin for encrypted values files with SOPS.' },
-        { question: 'What are subcharts and how do they work?', answer: 'Subcharts are dependencies in charts/ folder. Parent can override subchart values under subchart name key. Use exports for data from child to parent. Enable/disable with conditions.' }
+        { question: 'How do you store Helm charts in OCI registries?', answer: `Helm 3.8+ supports OCI registries natively.
+Use "helm push chart.tgz oci://registry/repo".
+Pull with "helm pull oci://registry/repo/chart".
+Works with Docker Hub, ECR, GCR, ACR.` },
+        { question: 'How do you handle secrets in Helm charts?', answer: `Never commit secrets in values.
+Use external secrets operators (External Secrets, Sealed Secrets).
+Reference existing secrets.
+Use helm-secrets plugin for encrypted values files with SOPS.` },
+        { question: 'What are subcharts and how do they work?', answer: `Subcharts are dependencies in charts/ folder.
+Parent can override subchart values under subchart name key.
+Use exports for data from child to parent.
+Enable/disable with conditions.` }
     ]
 };
 
