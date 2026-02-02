@@ -101,8 +101,8 @@ function ToolPage() {
             />
 
             <TabView tabs={['📖 Concepts & Notes', '❓ Interview Q&A']}>
-                <Accordion items={filteredConcepts} />
-                <QAList items={filteredQuestions} />
+                <Accordion items={filteredConcepts} key={`concepts-${toolId}`} />
+                <QAList items={filteredQuestions} key={`qa-${toolId}`} />
             </TabView>
         </div>
     );
